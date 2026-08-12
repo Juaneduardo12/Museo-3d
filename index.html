@@ -1832,6 +1832,9 @@
 
     </a-entity>
 
+    <button id="activar-sensores">
+        📱 ACTIVAR MOVIMIENTO
+    </button>
 
     <!-- ================================================= -->
     <!-- CÁMARA -->
@@ -1851,6 +1854,7 @@
 <!-- ================================================= -->
 <!-- JAVASCRIPT -->
 <!-- ================================================= -->
+
 
 <script>
 
@@ -1990,6 +1994,37 @@ document.addEventListener(
 
     }
 );
+
+document.querySelector('#activar-sensores').addEventListener('click', function () {
+
+    const scene = document.querySelector('a-scene');
+
+    if (
+        typeof DeviceOrientationEvent !== 'undefined' &&
+        typeof DeviceOrientationEvent.requestPermission === 'function'
+    ) {
+
+        DeviceOrientationEvent.requestPermission()
+            .then(function (permission) {
+
+                if (permission === 'granted') {
+                    console.log('Sensor activado');
+                }
+
+            })
+            .catch(function (error) {
+                console.error(error);
+            });
+
+    } else {
+
+        console.log('Movimiento del celular activado');
+
+    }
+
+    this.style.display = 'none';
+});
+
 
 </script>
 
