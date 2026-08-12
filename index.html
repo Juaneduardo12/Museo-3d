@@ -1,0 +1,1997 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Museo Virtual de Tecnología</title>
+
+    <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
+
+    <style>
+        body {
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+
+<body>
+
+<a-scene
+    background="color: #101820"
+    cursor="rayOrigin: mouse"
+    raycaster="objects: .clickable"
+    shadow="type: pcfsoft">
+
+    <!-- ================================================= -->
+    <!-- RECURSOS -->
+    <!-- ================================================= -->
+
+    <a-assets>
+
+        <!-- ================================================= -->
+        <!-- TEXTURA DE LADRILLO -->
+        <!-- ================================================= -->
+
+        <img
+            id="textura-ladrillo"
+            src="img/ladrillo.jpg"
+            crossorigin="anonymous">
+
+
+        <!-- ================= ROBOT ================= -->
+
+        <a-asset-item
+            id="tinker-obj_robot_bienvenido"
+            src="assests/tinker_robot_bienvenido.obj"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+        <a-asset-item
+            id="tinker-mtl_robot_bienvenido"
+            src="assests/obj_robot_bienvenido.mtl"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+
+        <!-- ================= ARDUINO 1 ================= -->
+
+        <a-asset-item
+            id="tinker-obj_arduino_1"
+            src="assests/tinker_arduino1.obj"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+        <a-asset-item
+            id="tinker-mtl_arduino_1"
+            src="assests/obj_arduino1.mtl"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+
+        <!-- ================= ARDUINO 2 ================= -->
+
+        <a-asset-item
+            id="tinker-obj_arduino_2"
+            src="assests/tinker_arduino2.obj"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+        <a-asset-item
+            id="tinker-mtl_arduino_2"
+            src="assests/obj_arduino2.mtl"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+
+        <!-- ================= ARDUINO 3 ================= -->
+
+        <a-asset-item
+            id="tinker-obj_arduino_3"
+            src="assests/tinker_arduino3.obj"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+        <a-asset-item
+            id="tinker-mtl_arduino_3"
+            src="assests/obj_arduino3.mtl"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+
+        <!-- ================= ARDUINO 4 ================= -->
+
+        <a-asset-item
+            id="tinker-obj_arduino_4"
+            src="assests/tinker_arduino4.obj"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+        <a-asset-item
+            id="tinker-mtl_arduino_4"
+            src="assests/obj_arduino4.mtl"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+
+        <!-- ================= MANTENIMIENTO 1 ================= -->
+
+        <a-asset-item
+            id="tinker-obj_mantenimiento_1"
+            src="assests/tinker_mantenimiento_1.obj"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+        <a-asset-item
+            id="tinker-mtl_mantenimiento_1"
+            src="assests/obj_mantenimiento_1.mtl"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+
+        <!-- ================= MANTENIMIENTO 2 ================= -->
+
+        <a-asset-item
+            id="tinker-obj_mantenimiento_2"
+            src="assests/tinker_mantenimiento_2.obj"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+        <a-asset-item
+            id="tinker-mtl_mantenimiento_2"
+            src="assests/obj_mantenimiento_2.mtl"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+
+        <!-- ================= MANTENIMIENTO 3 ================= -->
+
+        <a-asset-item
+            id="tinker-obj_mantenimiento_3"
+            src="assests/tinker_mantenimiento_3.obj"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+        <a-asset-item
+            id="tinker-mtl_mantenimiento_3"
+            src="assests/obj_mantenimiento_3.mtl"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+
+        <!-- ================= MANTENIMIENTO 4 ================= -->
+
+        <a-asset-item
+            id="tinker-obj_mantenimiento_4"
+            src="assests/tinker_mantenimiento_4.obj"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+        <a-asset-item
+            id="tinker-mtl_mantenimiento_4"
+            src="assests/obj_mantenimiento_4.mtl"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+
+        <!-- ================= MODELO 3D 1 ================= -->
+
+        <a-asset-item
+            id="tinker-obj_modelo_3d_1"
+            src="assests/tinker_modelo_3d_1.obj"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+        <a-asset-item
+            id="tinker-mtl_modelo_3d_1"
+            src="assests/obj_modelo_3d_1.mtl"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+
+        <!-- ================= MODELO 3D 2 ================= -->
+
+        <a-asset-item
+            id="tinker-obj_modelo_3d_2"
+            src="assests/tinker_modelo_3d_2.obj"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+        <a-asset-item
+            id="tinker-mtl_modelo_3d_2"
+            src="assests/obj_modelo_3d_2.mtl"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+
+        <!-- ================= MODELO 3D 3 ================= -->
+
+        <a-asset-item
+            id="tinker-obj_modelo_3d_3"
+            src="assests/tinker_modelo_3d_3.obj"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+        <a-asset-item
+            id="tinker-mtl_modelo_3d_3"
+            src="assests/obj_modelo_3d_3.mtl"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+
+        <!-- ================= MODELO 3D 4 ================= -->
+
+        <a-asset-item
+            id="tinker-obj_modelo_3d_4"
+            src="assests/tinker_modelo_3d_4.obj"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+        <a-asset-item
+            id="tinker-mtl_modelo_3d_4"
+            src="assests/obj_modelo_3d_4.mtl"
+            crossorigin="anonymous">
+        </a-asset-item>
+
+
+        <!-- ================= IMÁGENES ================= -->
+
+        <img id="img-sistema_1" src="img/sistema_1.png">
+        <img id="img-sistema_2" src="img/sistema_2.png">
+        <img id="img-sistema_3" src="img/sistema_3.png">
+        <img id="img-sistema_4" src="img/sistema_4.png">
+
+    </a-assets>
+
+
+    <!-- ================================================= -->
+    <!-- ILUMINACIÓN -->
+    <!-- ================================================= -->
+
+    <a-light
+        type="ambient"
+        color="#FFFFFF"
+        intensity="0.7">
+    </a-light>
+
+    <a-light
+        type="directional"
+        position="0 15 10"
+        intensity="0.8"
+        castShadow="true">
+    </a-light>
+
+    <a-light
+        type="point"
+        position="0 6 5"
+        intensity="1.2"
+        distance="30"
+        color="#FFFFFF">
+    </a-light>
+
+
+    <!-- ================================================= -->
+    <!-- PISO GENERAL CON TEXTURA -->
+    <!-- ================================================= -->
+
+    <a-plane
+        position="0 0 -35"
+        rotation="-90 0 0"
+        width="70"
+        height="80"
+        material="
+            src: #textura-ladrillo;
+            repeat: 20 25;
+            roughness: 0.9
+        "
+        shadow>
+    </a-plane>
+
+
+    <!-- ================================================= -->
+    <!-- PASILLO CENTRAL -->
+    <!-- ================================================= -->
+
+    <a-plane
+        position="0 0.03 -25"
+        rotation="-90 0 0"
+        width="14"
+        height="50"
+        color="#303B46">
+    </a-plane>
+
+    <a-box
+        position="-6.9 0.08 -25"
+        width="0.12"
+        height="0.05"
+        depth="50"
+        color="#00FFFF">
+    </a-box>
+
+    <a-box
+        position="6.9 0.08 -25"
+        width="0.12"
+        height="0.05"
+        depth="50"
+        color="#00FFFF">
+    </a-box>
+
+
+    <!-- ================================================= -->
+    <!-- TECHO -->
+    <!-- ================================================= -->
+
+    <a-box
+        position="0 12 -35"
+        width="70"
+        height="0.5"
+        depth="80"
+        color="#151C22">
+    </a-box>
+
+
+    <!-- ================================================= -->
+    <!-- PAREDES EXTERIORES CON LADRILLO -->
+    <!-- ================================================= -->
+
+    <!-- PARED DELANTERA -->
+
+    <a-box
+        position="0 6 5"
+        width="70"
+        height="12"
+        depth="0.5"
+        material="
+            src: #textura-ladrillo;
+            repeat: 14 3;
+            roughness: 0.85
+        "
+        shadow>
+    </a-box>
+
+
+    <!-- PARED TRASERA -->
+
+    <a-box
+        position="0 6 -75"
+        width="70"
+        height="12"
+        depth="0.5"
+        material="
+            src: #textura-ladrillo;
+            repeat: 14 3;
+            roughness: 0.85
+        "
+        shadow>
+    </a-box>
+
+
+    <!-- PARED IZQUIERDA -->
+
+    <a-box
+        position="-35 6 -35"
+        width="0.5"
+        height="12"
+        depth="80"
+        material="
+            src: #textura-ladrillo;
+            repeat: 3 16;
+            roughness: 0.85
+        "
+        shadow>
+    </a-box>
+
+
+    <!-- PARED DERECHA -->
+
+    <a-box
+        position="35 6 -35"
+        width="0.5"
+        height="12"
+        depth="80"
+        material="
+            src: #textura-ladrillo;
+            repeat: 3 16;
+            roughness: 0.85
+        "
+        shadow>
+    </a-box>
+
+
+    <!-- ================================================= -->
+    <!-- ENTRADA PRINCIPAL -->
+    <!-- ================================================= -->
+
+    <a-box
+        position="-7 5 4.5"
+        width="1"
+        height="10"
+        depth="1"
+        color="#00A8FF"
+        shadow>
+    </a-box>
+
+    <a-box
+        position="7 5 4.5"
+        width="1"
+        height="10"
+        depth="1"
+        color="#00A8FF"
+        shadow>
+    </a-box>
+
+    <a-box
+        position="0 10 4.5"
+        width="15"
+        height="1"
+        depth="1"
+        color="#00A8FF"
+        shadow>
+    </a-box>
+
+    <a-box
+        position="0 10.7 4.5"
+        width="11"
+        height="0.15"
+        depth="0.2"
+        color="#00FFFF">
+    </a-box>
+
+    <a-text
+        value="MUSEO VIRTUAL"
+        position="0 8.5 4"
+        align="center"
+        color="#FFFFFF"
+        width="18">
+    </a-text>
+
+    <a-text
+        value="DE TECNOLOGÍA"
+        position="0 7.2 4"
+        align="center"
+        color="#00FFFF"
+        width="13">
+    </a-text>
+
+
+    <!-- ================================================= -->
+    <!-- RECEPCIÓN -->
+    <!-- ================================================= -->
+
+    <a-plane
+        position="0 0.05 0"
+        rotation="-90 0 0"
+        width="24"
+        height="8"
+        color="#18232D">
+    </a-plane>
+
+    <a-ring
+        position="0 4 -1"
+        radius-inner="1.2"
+        radius-outer="1.5"
+        color="#00FFFF">
+    </a-ring>
+
+    <a-text
+        value="BIENVENIDO"
+        position="0 4 -0.9"
+        align="center"
+        color="#FFFFFF"
+        width="10">
+    </a-text>
+
+    <a-text
+        value="EXPLORA • APRENDE • DESCUBRE"
+        position="0 2.5 -1"
+        align="center"
+        color="#00FFFF"
+        width="7">
+    </a-text>
+
+
+    <!-- ================================================= -->
+    <!-- ROBOT -->
+    <!-- ================================================= -->
+
+    <a-entity
+        obj-model="obj: #tinker-obj_robot_bienvenido; mtl: #tinker-mtl_robot_bienvenido"
+        position="4 0 -1"
+        scale="0.08 0.08 0.08"
+        rotation="-90 150 0">
+    </a-entity>
+
+
+    <!-- ================================================= -->
+    <!-- PASILLO -->
+    <!-- ================================================= -->
+
+    <a-box
+        position="-8 6 -18"
+        width="0.5"
+        height="12"
+        depth="35"
+        color="#34414D">
+    </a-box>
+
+    <a-box
+        position="-8 6 -55"
+        width="0.5"
+        height="12"
+        depth="25"
+        color="#34414D">
+    </a-box>
+
+    <a-box
+        position="8 6 -18"
+        width="0.5"
+        height="12"
+        depth="35"
+        color="#34414D">
+    </a-box>
+
+    <a-box
+        position="8 6 -55"
+        width="0.5"
+        height="12"
+        depth="25"
+        color="#34414D">
+    </a-box>
+
+
+    <!-- ================================================= -->
+    <!-- LUCES PASILLO -->
+    <!-- ================================================= -->
+
+    <a-box position="0 11.5 -8"
+        width="5"
+        height="0.12"
+        depth="0.5"
+        color="#FFFFFF">
+    </a-box>
+
+    <a-box position="0 11.5 -18"
+        width="5"
+        height="0.12"
+        depth="0.5"
+        color="#FFFFFF">
+    </a-box>
+
+    <a-box position="0 11.5 -28"
+        width="5"
+        height="0.12"
+        depth="0.5"
+        color="#FFFFFF">
+    </a-box>
+
+    <a-box position="0 11.5 -38"
+        width="5"
+        height="0.12"
+        depth="0.5"
+        color="#FFFFFF">
+    </a-box>
+
+
+    <a-text
+        value="EXPLORA NUESTRAS SALAS"
+        position="0 5 -12"
+        align="center"
+        color="#FFFFFF"
+        width="9">
+    </a-text>
+
+    <a-text
+        value="↓"
+        position="0 3.5 -14"
+        align="center"
+        color="#00FFFF"
+        width="8">
+    </a-text>
+
+
+    <!-- ================================================= -->
+    <!-- SALA 1 - ARDUINO -->
+    <!-- ================================================= -->
+
+    <a-plane
+        position="-19 0.05 -24"
+        rotation="-90 0 0"
+        width="20"
+        height="22"
+        color="#123B5D">
+    </a-plane>
+
+
+    <!-- PARED TRASERA -->
+
+    <a-box
+        position="-19 6 -35"
+        width="20"
+        height="12"
+        depth="0.5"
+        material="
+            src: #textura-ladrillo;
+            repeat: 4 3
+        "
+        shadow>
+    </a-box>
+
+
+    <!-- PARED LATERAL -->
+
+    <a-box
+        position="-29 6 -24"
+        width="0.5"
+        height="12"
+        depth="22"
+        material="
+            src: #textura-ladrillo;
+            repeat: 3 5
+        "
+        shadow>
+    </a-box>
+
+
+    <!-- ENTRADA -->
+
+    <a-box
+        position="-27 6 -13"
+        width="5"
+        height="12"
+        depth="0.5"
+        material="src: #textura-ladrillo; repeat: 1 3">
+    </a-box>
+
+    <a-box
+        position="-11 6 -13"
+        width="5"
+        height="12"
+        depth="0.5"
+        material="src: #textura-ladrillo; repeat: 1 3">
+    </a-box>
+
+    <a-box
+        position="-19 10.5 -13"
+        width="16"
+        height="3"
+        depth="0.5"
+        color="#087EA4">
+    </a-box>
+
+    <a-box
+        position="-24.5 5 -13"
+        width="0.7"
+        height="10"
+        depth="0.8"
+        color="#05668D">
+    </a-box>
+
+    <a-box
+        position="-13.5 5 -13"
+        width="0.7"
+        height="10"
+        depth="0.8"
+        color="#05668D">
+    </a-box>
+
+    <a-box
+        position="-19 10 -13"
+        width="12"
+        height="0.7"
+        depth="0.8"
+        color="#05668D">
+    </a-box>
+
+    <a-box
+        position="-19 10.6 -13"
+        width="10"
+        height="0.15"
+        depth="0.15"
+        color="#00FFFF">
+    </a-box>
+
+    <a-text
+        value="SALA ARDUINO"
+        position="-19 8 -12.8"
+        align="center"
+        color="#00FFFF"
+        width="9">
+    </a-text>
+
+
+    <!-- DECORACIÓN -->
+
+    <a-box
+        position="-28 6 -34"
+        width="1.2"
+        height="12"
+        depth="1.2"
+        color="#05668D"
+        shadow>
+    </a-box>
+
+    <a-box
+        position="-10 6 -34"
+        width="1.2"
+        height="12"
+        depth="1.2"
+        color="#05668D"
+        shadow>
+    </a-box>
+
+    <a-box
+        position="-19 11 -34"
+        width="19"
+        height="0.7"
+        depth="1"
+        color="#05668D">
+    </a-box>
+
+    <a-box
+        position="-19 6 -33.3"
+        width="12"
+        height="6"
+        depth="0.15"
+        color="#0B2239">
+    </a-box>
+
+    <a-text
+        value="TECNOLOGÍA ARDUINO"
+        position="-19 8.5 -33.1"
+        align="center"
+        color="#00FFFF"
+        width="9">
+    </a-text>
+
+    <a-text
+        value="INNOVACIÓN • ELECTRÓNICA • ROBÓTICA"
+        position="-19 7.2 -33.1"
+        align="center"
+        color="#FFFFFF"
+        width="5">
+    </a-text>
+
+
+    <!-- ARDUINO 1 -->
+
+    <a-cylinder
+        position="-24 1 -20"
+        radius="1.4"
+        height="2"
+        color="#17202A">
+    </a-cylinder>
+
+    <a-entity
+        class="clickable"
+        mostrar-informacion
+        data-titulo="ARDUINO UNO"
+        data-info="Arduino UNO es una placa de desarrollo basada en un microcontrolador. Se utiliza para crear proyectos de electrónica, robótica y automatización."
+        data-panel-x="-24"
+        data-panel-y="4.8"
+        data-panel-z="-17"
+        obj-model="obj: #tinker-obj_arduino_1; mtl: #tinker-mtl_arduino_1"
+        position="-22.5 2.5 -17"
+        scale="0.03 0.03 0.03"
+        rotation="-90 90 0">
+    </a-entity>
+
+
+    <!-- ARDUINO 2 -->
+
+    <a-cylinder
+        position="-14 1 -20"
+        radius="1.4"
+        height="2"
+        color="#17202A">
+    </a-cylinder>
+
+    <a-entity
+        class="clickable"
+        mostrar-informacion
+        data-titulo="ARDUINO Y ELECTRÓNICA"
+        data-info="Este modelo representa una aplicación de Arduino. Puede utilizar sensores, actuadores, LEDs y otros componentes electrónicos para crear sistemas interactivos."
+        data-panel-x="-14"
+        data-panel-y="4.8"
+        data-panel-z="-17"
+        obj-model="obj: #tinker-obj_arduino_2; mtl: #tinker-mtl_arduino_2"
+        position="-14 1.5 -18.5"
+        scale="0.05 0.05 0.05"
+        rotation="0 90 0">
+    </a-entity>
+
+
+    <!-- ARDUINO 3 -->
+
+    <a-cylinder
+        position="-24 1 -29"
+        radius="1.4"
+        height="2"
+        color="#17202A">
+    </a-cylinder>
+
+    <a-entity
+        class="clickable"
+        mostrar-informacion
+        data-titulo="PROYECTO CON ARDUINO"
+        data-info="Arduino permite programar dispositivos electrónicos mediante código. Es ampliamente utilizado en educación, prototipos y proyectos de automatización."
+        data-panel-x="-24"
+        data-panel-y="4.8"
+        data-panel-z="-26"
+        obj-model="obj: #tinker-obj_arduino_3; mtl: #tinker-mtl_arduino_3"
+        position="-24.5 2.5 -31.5"
+        scale="0.05 0.05 0.05"
+        rotation="-90 50 0">
+    </a-entity>
+
+
+    <!-- ARDUINO 4 -->
+
+    <a-cylinder
+        position="-14 1 -29"
+        radius="1.4"
+        height="2"
+        color="#17202A">
+    </a-cylinder>
+
+    <a-entity
+        class="clickable"
+        mostrar-informacion
+        data-titulo="AUTOMATIZACIÓN"
+        data-info="Los proyectos con Arduino pueden automatizar procesos mediante sensores, motores, luces y otros dispositivos."
+        data-panel-x="-14"
+        data-panel-y="4.8"
+        data-panel-z="-26"
+        obj-model="obj: #tinker-obj_arduino_4; mtl: #tinker-mtl_arduino_4"
+        position="-11.5 2.5 -30"
+        scale="0.05 0.05 0.05"
+        rotation="-90 80 0">
+    </a-entity>
+
+
+    <!-- LUCES -->
+
+    <a-cylinder position="-24 2.15 -20"
+        radius="1.55"
+        height="0.08"
+        color="#00FFFF">
+    </a-cylinder>
+
+    <a-cylinder position="-14 2.15 -20"
+        radius="1.55"
+        height="0.08"
+        color="#00FFFF">
+    </a-cylinder>
+
+    <a-cylinder position="-24 2.15 -29"
+        radius="1.55"
+        height="0.08"
+        color="#00FFFF">
+    </a-cylinder>
+
+    <a-cylinder position="-14 2.15 -29"
+        radius="1.55"
+        height="0.08"
+        color="#00FFFF">
+    </a-cylinder>
+
+
+    <!-- ================================================= -->
+    <!-- SALA 2 - MANTENIMIENTO -->
+    <!-- ================================================= -->
+
+    <a-plane
+        position="19 0.05 -24"
+        rotation="-90 0 0"
+        width="20"
+        height="22"
+        color="#164A35">
+    </a-plane>
+
+
+    <a-box
+        position="19 6 -35"
+        width="20"
+        height="12"
+        depth="0.5"
+        material="
+            src: #textura-ladrillo;
+            repeat: 4 3
+        "
+        shadow>
+    </a-box>
+
+    <a-box
+        position="29 6 -24"
+        width="0.5"
+        height="12"
+        depth="22"
+        material="
+            src: #textura-ladrillo;
+            repeat: 3 5
+        "
+        shadow>
+    </a-box>
+
+
+    <!-- ENTRADA -->
+
+    <a-box
+        position="11 6 -13"
+        width="5"
+        height="12"
+        depth="0.5"
+        material="src: #textura-ladrillo; repeat: 1 3">
+    </a-box>
+
+    <a-box
+        position="27 6 -13"
+        width="5"
+        height="12"
+        depth="0.5"
+        material="src: #textura-ladrillo; repeat: 1 3">
+    </a-box>
+
+    <a-box
+        position="19 10.5 -13"
+        width="16"
+        height="3"
+        depth="0.5"
+        color="#1E8449">
+    </a-box>
+
+    <a-box
+        position="13.5 5 -13"
+        width="0.7"
+        height="10"
+        depth="0.8"
+        color="#196F3D">
+    </a-box>
+
+    <a-box
+        position="24.5 5 -13"
+        width="0.7"
+        height="10"
+        depth="0.8"
+        color="#196F3D">
+    </a-box>
+
+    <a-box
+        position="19 10 -13"
+        width="12"
+        height="0.7"
+        depth="0.8"
+        color="#196F3D">
+    </a-box>
+
+    <a-box
+        position="19 10.6 -13"
+        width="10"
+        height="0.15"
+        depth="0.15"
+        color="#00FF88">
+    </a-box>
+
+    <a-text
+        value="MANTENIMIENTO DE PC"
+        position="19 8 -12.8"
+        align="center"
+        color="#00FF88"
+        width="9">
+    </a-text>
+
+
+    <!-- DECORACIÓN -->
+
+    <a-box
+        position="28 6 -34"
+        width="1.2"
+        height="12"
+        depth="1.2"
+        color="#196F3D">
+    </a-box>
+
+    <a-box
+        position="10 6 -34"
+        width="1.2"
+        height="12"
+        depth="1.2"
+        color="#196F3D">
+    </a-box>
+
+    <a-box
+        position="19 11 -34"
+        width="19"
+        height="0.7"
+        depth="1"
+        color="#196F3D">
+    </a-box>
+
+    <a-box
+        position="19 6 -33.3"
+        width="12"
+        height="6"
+        depth="0.15"
+        color="#0B3020">
+    </a-box>
+
+    <a-text
+        value="MANTENIMIENTO DE PC"
+        position="19 8.5 -33.1"
+        align="center"
+        color="#00FF88"
+        width="9">
+    </a-text>
+
+    <a-text
+        value="HARDWARE • DIAGNÓSTICO • SOPORTE"
+        position="19 7.2 -33.1"
+        align="center"
+        color="#FFFFFF"
+        width="5">
+    </a-text>
+
+
+    <!-- MANTENIMIENTO 1 -->
+
+    <a-cylinder
+        position="14 1 -20"
+        radius="1.4"
+        height="2"
+        color="#17202A">
+    </a-cylinder>
+
+    <a-entity
+        class="clickable"
+        mostrar-informacion
+        data-titulo="MANTENIMIENTO DE COMPUTADORA"
+        data-info="El mantenimiento preventivo ayuda a conservar una computadora en buen estado. Incluye limpieza, revisión de componentes y comprobación del funcionamiento."
+        data-panel-x="14"
+        data-panel-y="4.8"
+        data-panel-z="-17"
+        obj-model="obj: #tinker-obj_mantenimiento_1; mtl: #tinker-mtl_mantenimiento_1"
+        position="13.5 2.5 -19"
+        scale="0.02 0.02 0.02"
+        rotation="-90 180 0">
+    </a-entity>
+
+
+    <!-- MANTENIMIENTO 2 -->
+
+    <a-cylinder
+        position="24 1 -20"
+        radius="1.4"
+        height="2"
+        color="#17202A">
+    </a-cylinder>
+
+    <a-entity
+        class="clickable"
+        mostrar-informacion
+        data-titulo="LIMPIEZA DE HARDWARE"
+        data-info="La limpieza interna elimina polvo y suciedad que pueden afectar ventiladores, disipadores y otros componentes."
+        data-panel-x="24"
+        data-panel-y="4.8"
+        data-panel-z="-17"
+        obj-model="obj: #tinker-obj_mantenimiento_2; mtl: #tinker-mtl_mantenimiento_2"
+        position="23 2.5 -20"
+        scale="0.02 0.02 0.02"
+        rotation="-90 -90 0">
+    </a-entity>
+
+
+    <!-- MANTENIMIENTO 3 -->
+
+    <a-cylinder
+        position="14 1 -29"
+        radius="1.4"
+        height="2"
+        color="#17202A">
+    </a-cylinder>
+
+    <a-entity
+        class="clickable"
+        mostrar-informacion
+        data-titulo="DIAGNÓSTICO"
+        data-info="El diagnóstico permite identificar fallas de hardware y software para determinar las acciones necesarias para reparar el equipo."
+        data-panel-x="14"
+        data-panel-y="4.8"
+        data-panel-z="-26"
+        obj-model="obj: #tinker-obj_mantenimiento_3; mtl: #tinker-mtl_mantenimiento_3"
+        position="14 2.5 -29.5"
+        scale="0.02 0.02 0.02"
+        rotation="-90 180 0">
+    </a-entity>
+
+
+    <!-- MANTENIMIENTO 4 -->
+
+    <a-cylinder
+        position="24 1 -29"
+        radius="1.4"
+        height="2"
+        color="#17202A">
+    </a-cylinder>
+
+    <a-entity
+        class="clickable"
+        mostrar-informacion
+        data-titulo="SOPORTE TÉCNICO"
+        data-info="El soporte técnico comprende actividades de mantenimiento, reparación, configuración y optimización de equipos de cómputo."
+        data-panel-x="24"
+        data-panel-y="4.8"
+        data-panel-z="-26"
+        obj-model="obj: #tinker-obj_mantenimiento_4; mtl: #tinker-mtl_mantenimiento_4"
+        position="24.5 2.5 -31"
+        scale="0.05 0.05 0.05"
+        rotation="-90 -90 0">
+    </a-entity>
+
+
+    <!-- LUCES -->
+
+    <a-cylinder position="14 2.15 -20"
+        radius="1.55"
+        height="0.08"
+        color="#00FF88">
+    </a-cylinder>
+
+    <a-cylinder position="24 2.15 -20"
+        radius="1.55"
+        height="0.08"
+        color="#00FF88">
+    </a-cylinder>
+
+    <a-cylinder position="14 2.15 -29"
+        radius="1.55"
+        height="0.08"
+        color="#00FF88">
+    </a-cylinder>
+
+    <a-cylinder position="24 2.15 -29"
+        radius="1.55"
+        height="0.08"
+        color="#00FF88">
+    </a-cylinder>
+
+
+    <!-- ================================================= -->
+    <!-- SALA 3 - MODELOS 3D -->
+    <!-- ================================================= -->
+
+    <a-plane
+        position="-19 0.05 -55"
+        rotation="-90 0 0"
+        width="20"
+        height="22"
+        color="#351B4D">
+    </a-plane>
+
+
+    <a-box
+        position="-19 6 -66"
+        width="20"
+        height="12"
+        depth="0.5"
+        material="
+            src: #textura-ladrillo;
+            repeat: 4 3
+        "
+        shadow>
+    </a-box>
+
+    <a-box
+        position="-29 6 -55"
+        width="0.5"
+        height="12"
+        depth="22"
+        material="
+            src: #textura-ladrillo;
+            repeat: 3 5
+        "
+        shadow>
+    </a-box>
+
+
+    <!-- ENTRADA -->
+
+    <a-box
+        position="-27 6 -44"
+        width="5"
+        height="12"
+        depth="0.5"
+        material="src: #textura-ladrillo; repeat: 1 3">
+    </a-box>
+
+    <a-box
+        position="-11 6 -44"
+        width="5"
+        height="12"
+        depth="0.5"
+        material="src: #textura-ladrillo; repeat: 1 3">
+    </a-box>
+
+    <a-box
+        position="-19 10.5 -44"
+        width="16"
+        height="3"
+        depth="0.5"
+        color="#8E44AD">
+    </a-box>
+
+    <a-box
+        position="-24.5 5 -44"
+        width="0.7"
+        height="10"
+        depth="0.8"
+        color="#6C3483">
+    </a-box>
+
+    <a-box
+        position="-13.5 5 -44"
+        width="0.7"
+        height="10"
+        depth="0.8"
+        color="#6C3483">
+    </a-box>
+
+    <a-box
+        position="-19 10 -44"
+        width="12"
+        height="0.7"
+        depth="0.8"
+        color="#6C3483">
+    </a-box>
+
+    <a-box
+        position="-19 10.6 -44"
+        width="10"
+        height="0.15"
+        depth="0.15"
+        color="#E056FD">
+    </a-box>
+
+    <a-text
+        value="MODELOS 3D"
+        position="-19 8 -43.8"
+        align="center"
+        color="#E056FD"
+        width="9">
+    </a-text>
+
+
+    <!-- DECORACIÓN -->
+
+    <a-box
+        position="-28 6 -65"
+        width="1.2"
+        height="12"
+        depth="1.2"
+        color="#6C3483">
+    </a-box>
+
+    <a-box
+        position="-10 6 -65"
+        width="1.2"
+        height="12"
+        depth="1.2"
+        color="#6C3483">
+    </a-box>
+
+    <a-box
+        position="-19 11 -65"
+        width="19"
+        height="0.7"
+        depth="1"
+        color="#6C3483">
+    </a-box>
+
+    <a-box
+        position="-19 6 -64.3"
+        width="12"
+        height="6"
+        depth="0.15"
+        color="#24102F">
+    </a-box>
+
+    <a-text
+        value="MODELOS 3D"
+        position="-19 8.5 -64.1"
+        align="center"
+        color="#E056FD"
+        width="9">
+    </a-text>
+
+    <a-text
+        value="DISEÑO • MODELADO • IMPRESIÓN 3D"
+        position="-19 7.2 -64.1"
+        align="center"
+        color="#FFFFFF"
+        width="5">
+    </a-text>
+
+
+    <!-- MODELO 3D 1 -->
+
+    <a-cylinder
+        position="-24 1 -51"
+        radius="1.4"
+        height="2"
+        color="#24102F">
+    </a-cylinder>
+
+    <a-entity
+        class="clickable"
+        mostrar-informacion
+        data-titulo="MODELO 3D"
+        data-info="Los modelos tridimensionales permiten representar objetos digitales en tres dimensiones. Pueden utilizarse para diseño, prototipos, videojuegos e impresión 3D."
+        data-panel-x="-24"
+        data-panel-y="4.8"
+        data-panel-z="-48"
+        obj-model="obj: #tinker-obj_modelo_3d_1; mtl: #tinker-mtl_modelo_3d_1"
+        position="-24 2.5 -50"
+        scale="0.03 0.03 0.03"
+        rotation="-90 -30 0">
+    </a-entity>
+
+
+    <!-- MODELO 3D 2 -->
+
+    <a-cylinder
+        position="-14 1 -51"
+        radius="1.4"
+        height="2"
+        color="#24102F">
+    </a-cylinder>
+
+    <a-entity
+        class="clickable"
+        mostrar-informacion
+        data-titulo="DISEÑO DIGITAL"
+        data-info="El diseño digital permite crear objetos y escenarios mediante herramientas de modelado 3D."
+        data-panel-x="-14"
+        data-panel-y="4.8"
+        data-panel-z="-48"
+        obj-model="obj: #tinker-obj_modelo_3d_2; mtl: #tinker-mtl_modelo_3d_2"
+        position="-9 2.5 -52.5"
+        scale="0.08 0.08 0.08"
+        rotation="-90 -30 0">
+    </a-entity>
+
+
+    <!-- MODELO 3D 3 -->
+
+    <a-cylinder
+        position="-24 1 -60"
+        radius="1.4"
+        height="2"
+        color="#24102F">
+    </a-cylinder>
+
+    <a-entity
+        class="clickable"
+        mostrar-informacion
+        data-titulo="IMPRESIÓN 3D"
+        data-info="La impresión 3D permite fabricar objetos físicos a partir de modelos digitales utilizando diferentes materiales."
+        data-panel-x="-24"
+        data-panel-y="4.8"
+        data-panel-z="-57"
+        obj-model="obj: #tinker-obj_modelo_3d_3; mtl: #tinker-mtl_modelo_3d_3"
+        position="-26 4 -61"
+        scale="0.05 0.05 0.05"
+        rotation="90 200 0">
+    </a-entity>
+
+
+    <!-- MODELO 3D 4 -->
+
+    <a-cylinder
+        position="-14 1 -60"
+        radius="1.4"
+        height="2"
+        color="#24102F">
+    </a-cylinder>
+
+    <a-entity
+        class="clickable"
+        mostrar-informacion
+        data-titulo="PROTOTIPADO 3D"
+        data-info="El prototipado rápido permite crear versiones físicas de un diseño para comprobar su forma y funcionamiento."
+        data-panel-x="-14"
+        data-panel-y="4.8"
+        data-panel-z="-57"
+        obj-model="obj: #tinker-obj_modelo_3d_4; mtl: #tinker-mtl_modelo_3d_4"
+        position="-14 2.5 -60"
+        scale="0.03 0.03 0.03"
+        rotation="-90 -30 0">
+    </a-entity>
+
+
+    <!-- LUCES -->
+
+    <a-cylinder position="-24 2.15 -51"
+        radius="1.55"
+        height="0.08"
+        color="#E056FD">
+    </a-cylinder>
+
+    <a-cylinder position="-14 2.15 -51"
+        radius="1.55"
+        height="0.08"
+        color="#E056FD">
+    </a-cylinder>
+
+    <a-cylinder position="-24 2.15 -60"
+        radius="1.55"
+        height="0.08"
+        color="#E056FD">
+    </a-cylinder>
+
+    <a-cylinder position="-14 2.15 -60"
+        radius="1.55"
+        height="0.08"
+        color="#E056FD">
+    </a-cylinder>
+
+
+    <!-- ================================================= -->
+    <!-- SALA 4 - PROGRAMACIÓN -->
+    <!-- ================================================= -->
+
+    <a-plane
+        position="19 0.05 -55"
+        rotation="-90 0 0"
+        width="20"
+        height="22"
+        color="#4A2C18">
+    </a-plane>
+
+
+    <a-box
+        position="19 6 -66"
+        width="20"
+        height="12"
+        depth="0.5"
+        material="
+            src: #textura-ladrillo;
+            repeat: 4 3
+        "
+        shadow>
+    </a-box>
+
+    <a-box
+        position="29 6 -55"
+        width="0.5"
+        height="12"
+        depth="22"
+        material="
+            src: #textura-ladrillo;
+            repeat: 3 5
+        "
+        shadow>
+    </a-box>
+
+
+    <!-- ENTRADA -->
+
+    <a-box
+        position="11 6 -44"
+        width="5"
+        height="12"
+        depth="0.5"
+        material="src: #textura-ladrillo; repeat: 1 3">
+    </a-box>
+
+    <a-box
+        position="27 6 -44"
+        width="5"
+        height="12"
+        depth="0.5"
+        material="src: #textura-ladrillo; repeat: 1 3">
+    </a-box>
+
+    <a-box
+        position="19 10.5 -44"
+        width="16"
+        height="3"
+        depth="0.5"
+        color="#CA6F1E">
+    </a-box>
+
+    <a-box
+        position="13.5 5 -44"
+        width="0.7"
+        height="10"
+        depth="0.8"
+        color="#BA4A00">
+    </a-box>
+
+    <a-box
+        position="24.5 5 -44"
+        width="0.7"
+        height="10"
+        depth="0.8"
+        color="#BA4A00">
+    </a-box>
+
+    <a-box
+        position="19 10 -44"
+        width="12"
+        height="0.7"
+        depth="0.8"
+        color="#BA4A00">
+    </a-box>
+
+    <a-box
+        position="19 10.6 -44"
+        width="10"
+        height="0.15"
+        depth="0.15"
+        color="#FFD166">
+    </a-box>
+
+    <a-text
+        value="PROGRAMACIÓN"
+        position="19 8 -43.8"
+        align="center"
+        color="#FFD166"
+        width="9">
+    </a-text>
+
+
+    <!-- DECORACIÓN -->
+
+    <a-box
+        position="28 6 -65"
+        width="1.2"
+        height="12"
+        depth="1.2"
+        color="#A04000">
+    </a-box>
+
+    <a-box
+        position="10 6 -65"
+        width="1.2"
+        height="12"
+        depth="1.2"
+        color="#A04000">
+    </a-box>
+
+    <a-box
+        position="19 11 -65"
+        width="19"
+        height="0.7"
+        depth="1"
+        color="#A04000">
+    </a-box>
+
+    <a-box
+        position="19 6 -64.3"
+        width="12"
+        height="6"
+        depth="0.15"
+        color="#2C160B">
+    </a-box>
+
+    <a-text
+        value="PROGRAMACIÓN"
+        position="19 8.5 -64.1"
+        align="center"
+        color="#FFD166"
+        width="9">
+    </a-text>
+
+    <a-text
+        value="CÓDIGO • SOFTWARE • DESARROLLO"
+        position="19 7.2 -64.1"
+        align="center"
+        color="#FFFFFF"
+        width="5">
+    </a-text>
+
+
+    <!-- SISTEMA 1 -->
+
+    <a-cylinder
+        position="14 1 -51"
+        radius="1.4"
+        height="2"
+        color="#2C160B">
+    </a-cylinder>
+
+    <a-image
+        class="clickable"
+        mostrar-informacion
+        data-titulo="SISTEMA INFORMÁTICO 1"
+        data-info="Este proyecto representa un sistema informático desarrollado para solucionar una necesidad específica mediante software."
+        data-panel-x="14"
+        data-panel-y="6.5"
+        data-panel-z="-47"
+        src="#img-sistema_1"
+        position="14 3.5 -50.5"
+        width="8"
+        height="4.5"
+        scale="0.5 0.5 0.5">
+    </a-image>
+
+
+    <!-- SISTEMA 2 -->
+
+    <a-cylinder
+        position="24 1 -51"
+        radius="1.4"
+        height="2"
+        color="#2C160B">
+    </a-cylinder>
+
+    <a-image
+        class="clickable"
+        mostrar-informacion
+        data-titulo="SISTEMA INFORMÁTICO 2"
+        data-info="Los sistemas web permiten administrar información desde un navegador y facilitan el acceso a diferentes usuarios."
+        data-panel-x="24"
+        data-panel-y="6.5"
+        data-panel-z="-47"
+        src="#img-sistema_2"
+        position="24 3.5 -50.5"
+        width="8"
+        height="4.5"
+        scale="0.5 0.5 0.5">
+    </a-image>
+
+
+    <!-- SISTEMA 3 -->
+
+    <a-cylinder
+        position="14 1 -60"
+        radius="1.4"
+        height="2"
+        color="#2C160B">
+    </a-cylinder>
+
+    <a-image
+        class="clickable"
+        mostrar-informacion
+        data-titulo="DESARROLLO WEB"
+        data-info="El desarrollo web combina HTML, CSS, JavaScript y otras tecnologías para crear aplicaciones y sitios web interactivos."
+        data-panel-x="14"
+        data-panel-y="6.5"
+        data-panel-z="-57"
+        src="#img-sistema_3"
+        position="14 3.5 -59.5"
+        width="8"
+        height="4.5"
+        scale="0.5 0.5 0.5">
+    </a-image>
+
+
+    <!-- SISTEMA 4 -->
+
+    <a-cylinder
+        position="24 1 -60"
+        radius="1.4"
+        height="2"
+        color="#2C160B">
+    </a-cylinder>
+
+    <a-image
+        class="clickable"
+        mostrar-informacion
+        data-titulo="APLICACIÓN DE SOFTWARE"
+        data-info="Las aplicaciones de software permiten automatizar procesos, administrar información y ofrecer soluciones a diferentes necesidades."
+        data-panel-x="24"
+        data-panel-y="6.5"
+        data-panel-z="-57"
+        src="#img-sistema_4"
+        position="24 3.5 -59.5"
+        width="8"
+        height="4.5"
+        scale="0.5 0.5 0.5">
+    </a-image>
+
+
+    <!-- LUCES -->
+
+    <a-cylinder position="14 2.15 -51"
+        radius="1.55"
+        height="0.08"
+        color="#FFD166">
+    </a-cylinder>
+
+    <a-cylinder position="24 2.15 -51"
+        radius="1.55"
+        height="0.08"
+        color="#FFD166">
+    </a-cylinder>
+
+    <a-cylinder position="14 2.15 -60"
+        radius="1.55"
+        height="0.08"
+        color="#FFD166">
+    </a-cylinder>
+
+    <a-cylinder position="24 2.15 -60"
+        radius="1.55"
+        height="0.08"
+        color="#FFD166">
+    </a-cylinder>
+
+
+    <!-- ================================================= -->
+    <!-- SEÑALIZACIÓN -->
+    <!-- ================================================= -->
+
+    <a-text
+        value="← ARDUINO"
+        position="-6 3 -14"
+        align="center"
+        color="#00FFFF"
+        width="6">
+    </a-text>
+
+    <a-text
+        value="MANTENIMIENTO →"
+        position="6 3 -14"
+        align="center"
+        color="#00FF88"
+        width="6">
+    </a-text>
+
+    <a-text
+        value="← MODELOS 3D"
+        position="-6 3 -42"
+        align="center"
+        color="#E056FD"
+        width="6">
+    </a-text>
+
+    <a-text
+        value="PROGRAMACIÓN →"
+        position="6 3 -42"
+        align="center"
+        color="#FFD166"
+        width="6">
+    </a-text>
+
+
+    <!-- ================================================= -->
+    <!-- PANEL DE INFORMACIÓN -->
+    <!-- ================================================= -->
+
+    <a-entity
+        id="panel-info"
+        visible="false">
+
+        <!-- BORDE -->
+
+        <a-plane
+            position="0 0 -0.05"
+            width="8.4"
+            height="4.8"
+            color="#00FFFF"
+            opacity="0.5">
+        </a-plane>
+
+
+        <!-- FONDO -->
+
+        <a-plane
+            position="0 0 0"
+            width="8"
+            height="4.5"
+            color="#101820"
+            opacity="0.97">
+        </a-plane>
+
+
+        <!-- TÍTULO -->
+
+        <a-text
+            id="info-titulo"
+            value="INFORMACIÓN"
+            position="0 1.45 0.08"
+            align="center"
+            color="#00FFFF"
+            width="7">
+        </a-text>
+
+
+        <!-- TEXTO -->
+
+        <a-text
+            id="info-texto"
+            value=""
+            position="0 0.45 0.08"
+            align="center"
+            color="#FFFFFF"
+            width="6.6"
+            wrap-count="45"
+            line-height="55">
+        </a-text>
+
+
+        <!-- BOTÓN -->
+
+        <a-plane
+            id="btn-cerrar"
+            class="clickable"
+            position="0 -1.55 0.1"
+            width="2.5"
+            height="0.6"
+            color="#E74C3C">
+        </a-plane>
+
+        <a-text
+            value="CERRAR"
+            position="0 -1.55 0.18"
+            align="center"
+            color="#FFFFFF"
+            width="4">
+        </a-text>
+
+    </a-entity>
+
+
+    <!-- ================================================= -->
+    <!-- CÁMARA -->
+    <!-- ================================================= -->
+
+<a-camera
+    id="camera"
+    position="0 3 2"
+    wasd-controls="enabled: true; acceleration: 25"
+    look-controls="enabled: true; pointerLockEnabled: false"
+    cursor="rayOrigin: mouse">
+</a-camera>
+
+</a-scene>
+
+
+<!-- ================================================= -->
+<!-- JAVASCRIPT -->
+<!-- ================================================= -->
+
+<script>
+
+AFRAME.registerComponent('mostrar-informacion', {
+
+    init: function () {
+
+        this.el.addEventListener('click', () => {
+
+            const tituloInfo =
+                this.el.getAttribute('data-titulo');
+
+            const textoInfo =
+                this.el.getAttribute('data-info');
+
+            const panel =
+                document.querySelector('#panel-info');
+
+            const titulo =
+                document.querySelector('#info-titulo');
+
+            const texto =
+                document.querySelector('#info-texto');
+
+
+            if (!panel || !titulo || !texto) {
+
+                console.error(
+                    "No se encontró el panel de información."
+                );
+
+                return;
+            }
+
+
+            /* ==========================================
+               ACTUALIZAR INFORMACIÓN
+            ========================================== */
+
+            titulo.setAttribute(
+                'value',
+                tituloInfo
+            );
+
+            texto.setAttribute(
+                'value',
+                textoInfo
+            );
+
+
+            /* ==========================================
+               OBTENER POSICIÓN DEL PANEL
+            ========================================== */
+
+            const x =
+                parseFloat(
+                    this.el.getAttribute('data-panel-x')
+                );
+
+            const y =
+                parseFloat(
+                    this.el.getAttribute('data-panel-y')
+                );
+
+            const z =
+                parseFloat(
+                    this.el.getAttribute('data-panel-z')
+                );
+
+
+            /* ==========================================
+               COLOCAR PANEL
+            ========================================== */
+
+            panel.setAttribute(
+                'position',
+                `${x} ${y} ${z}`
+            );
+
+
+            /* ==========================================
+               ROTACIÓN DEL PANEL
+            ========================================== */
+
+            panel.setAttribute(
+                'rotation',
+                '0 0 0'
+            );
+
+
+            /* ==========================================
+               MOSTRAR PANEL
+            ========================================== */
+
+            panel.setAttribute(
+                'visible',
+                'true'
+            );
+
+        });
+
+    }
+
+});
+
+
+/* =====================================================
+   BOTÓN CERRAR
+===================================================== */
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        const botonCerrar =
+            document.querySelector('#btn-cerrar');
+
+        const panel =
+            document.querySelector('#panel-info');
+
+
+        if (botonCerrar) {
+
+            botonCerrar.addEventListener(
+                'click',
+                function () {
+
+                    panel.setAttribute(
+                        'visible',
+                        'false'
+                    );
+
+                }
+            );
+
+        }
+
+    }
+);
+
+</script>
+
+</body>
+</html>
