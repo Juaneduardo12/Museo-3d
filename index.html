@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Museo Virtual de Tecnologia</title>
+    <title>Museo Virtual de Tecnología</title>
 
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
 
@@ -13,11 +13,45 @@
         body {
             margin: 0;
             overflow: hidden;
+            font-family: Arial, sans-serif;
+        }
+
+        /* ==========================================
+           BOTÓN PARA ACTIVAR LOS SENSORES
+        ========================================== */
+
+        #activar-sensores {
+            position: fixed;
+            z-index: 9999;
+            top: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+
+            padding: 14px 22px;
+
+            border: none;
+            border-radius: 10px;
+
+            background: #00a8ff;
+            color: white;
+
+            font-size: 16px;
+            font-weight: bold;
+
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+
+            cursor: pointer;
+        }
+
+        #activar-sensores:active {
+            transform: translateX(-50%) scale(0.95);
         }
     </style>
 </head>
 
+
 <body>
+
 
 <a-scene
     background="color: #101820"
@@ -25,15 +59,14 @@
     raycaster="objects: .clickable"
     shadow="type: pcfsoft">
 
+
     <!-- ================================================= -->
     <!-- RECURSOS -->
     <!-- ================================================= -->
 
     <a-assets>
 
-        <!-- ================================================= -->
         <!-- TEXTURA DE LADRILLO -->
-        <!-- ================================================= -->
 
         <img
             id="textura-ladrillo"
@@ -273,7 +306,7 @@
 
 
     <!-- ================================================= -->
-    <!-- PISO GENERAL CON TEXTURA -->
+    <!-- PISO GENERAL -->
     <!-- ================================================= -->
 
     <a-plane
@@ -333,10 +366,8 @@
 
 
     <!-- ================================================= -->
-    <!-- PAREDES EXTERIORES CON LADRILLO -->
+    <!-- PAREDES EXTERIORES -->
     <!-- ================================================= -->
-
-    <!-- PARED DELANTERA -->
 
     <a-box
         position="0 6 5"
@@ -351,9 +382,6 @@
         shadow>
     </a-box>
 
-
-    <!-- PARED TRASERA -->
-
     <a-box
         position="0 6 -75"
         width="70"
@@ -367,9 +395,6 @@
         shadow>
     </a-box>
 
-
-    <!-- PARED IZQUIERDA -->
-
     <a-box
         position="-35 6 -35"
         width="0.5"
@@ -382,9 +407,6 @@
         "
         shadow>
     </a-box>
-
-
-    <!-- PARED DERECHA -->
 
     <a-box
         position="35 6 -35"
@@ -545,34 +567,37 @@
     <!-- LUCES PASILLO -->
     <!-- ================================================= -->
 
-    <a-box position="0 11.5 -8"
+    <a-box
+        position="0 11.5 -8"
         width="5"
         height="0.12"
         depth="0.5"
         color="#FFFFFF">
     </a-box>
 
-    <a-box position="0 11.5 -18"
+    <a-box
+        position="0 11.5 -18"
         width="5"
         height="0.12"
         depth="0.5"
         color="#FFFFFF">
     </a-box>
 
-    <a-box position="0 11.5 -28"
+    <a-box
+        position="0 11.5 -28"
         width="5"
         height="0.12"
         depth="0.5"
         color="#FFFFFF">
     </a-box>
 
-    <a-box position="0 11.5 -38"
+    <a-box
+        position="0 11.5 -38"
         width="5"
         height="0.12"
         depth="0.5"
         color="#FFFFFF">
     </a-box>
-
 
     <a-text
         value="EXPLORA NUESTRAS SALAS"
@@ -603,9 +628,6 @@
         color="#123B5D">
     </a-plane>
 
-
-    <!-- PARED TRASERA -->
-
     <a-box
         position="-19 6 -35"
         width="20"
@@ -617,9 +639,6 @@
         "
         shadow>
     </a-box>
-
-
-    <!-- PARED LATERAL -->
 
     <a-box
         position="-29 6 -24"
@@ -634,7 +653,7 @@
     </a-box>
 
 
-    <!-- ENTRADA -->
+    <!-- ENTRADA SALA ARDUINO -->
 
     <a-box
         position="-27 6 -13"
@@ -888,7 +907,6 @@
         height="22"
         color="#164A35">
     </a-plane>
-
 
     <a-box
         position="19 6 -35"
@@ -1168,7 +1186,6 @@
         color="#351B4D">
     </a-plane>
 
-
     <a-box
         position="-19 6 -66"
         width="20"
@@ -1446,7 +1463,6 @@
         height="22"
         color="#4A2C18">
     </a-plane>
-
 
     <a-box
         position="19 6 -66"
@@ -1763,8 +1779,6 @@
         id="panel-info"
         visible="false">
 
-        <!-- BORDE -->
-
         <a-plane
             position="0 0 -0.05"
             width="8.4"
@@ -1772,9 +1786,6 @@
             color="#00FFFF"
             opacity="0.5">
         </a-plane>
-
-
-        <!-- FONDO -->
 
         <a-plane
             position="0 0 0"
@@ -1784,9 +1795,6 @@
             opacity="0.97">
         </a-plane>
 
-
-        <!-- TÍTULO -->
-
         <a-text
             id="info-titulo"
             value="INFORMACIÓN"
@@ -1795,9 +1803,6 @@
             color="#00FFFF"
             width="7">
         </a-text>
-
-
-        <!-- TEXTO -->
 
         <a-text
             id="info-texto"
@@ -1809,9 +1814,6 @@
             wrap-count="45"
             line-height="55">
         </a-text>
-
-
-        <!-- BOTÓN -->
 
         <a-plane
             id="btn-cerrar"
@@ -1832,21 +1834,19 @@
 
     </a-entity>
 
-    <button id="activar-sensores">
-        📱 ACTIVAR MOVIMIENTO
-    </button>
 
     <!-- ================================================= -->
     <!-- CÁMARA -->
     <!-- ================================================= -->
 
-<a-camera
-    id="camera"
-    position="0 3 2"
-    wasd-controls="enabled: true; acceleration: 25"
-    look-controls="enabled: true; magicWindowTrackingEnabled: true"
-    cursor="rayOrigin: mouse">
-</a-camera>
+    <a-camera
+        id="camera"
+        position="0 3 2"
+        look-controls="enabled: true; magicWindowTrackingEnabled: true"
+        cursor="rayOrigin: mouse">
+
+    </a-camera>
+
 
 </a-scene>
 
@@ -1855,8 +1855,12 @@
 <!-- JAVASCRIPT -->
 <!-- ================================================= -->
 
-
 <script>
+
+
+/* =====================================================
+   COMPONENTE INFORMACIÓN
+===================================================== */
 
 AFRAME.registerComponent('mostrar-informacion', {
 
@@ -1890,10 +1894,6 @@ AFRAME.registerComponent('mostrar-informacion', {
             }
 
 
-            /* ==========================================
-               ACTUALIZAR INFORMACIÓN
-            ========================================== */
-
             titulo.setAttribute(
                 'value',
                 tituloInfo
@@ -1904,10 +1904,6 @@ AFRAME.registerComponent('mostrar-informacion', {
                 textoInfo
             );
 
-
-            /* ==========================================
-               OBTENER POSICIÓN DEL PANEL
-            ========================================== */
 
             const x =
                 parseFloat(
@@ -1925,29 +1921,17 @@ AFRAME.registerComponent('mostrar-informacion', {
                 );
 
 
-            /* ==========================================
-               COLOCAR PANEL
-            ========================================== */
-
             panel.setAttribute(
                 'position',
                 `${x} ${y} ${z}`
             );
 
 
-            /* ==========================================
-               ROTACIÓN DEL PANEL
-            ========================================== */
-
             panel.setAttribute(
                 'rotation',
                 '0 0 0'
             );
 
-
-            /* ==========================================
-               MOSTRAR PANEL
-            ========================================== */
 
             panel.setAttribute(
                 'visible',
@@ -1995,38 +1979,445 @@ document.addEventListener(
     }
 );
 
-document.querySelector('#activar-sensores').addEventListener('click', function () {
 
-    const scene = document.querySelector('a-scene');
+/* =====================================================
+   TECLADO BLUETOOTH
+===================================================== */
 
-    if (
-        typeof DeviceOrientationEvent !== 'undefined' &&
-        typeof DeviceOrientationEvent.requestPermission === 'function'
-    ) {
+const teclas = {
 
-        DeviceOrientationEvent.requestPermission()
-            .then(function (permission) {
+    w: false,
+    s: false,
+    a: false,
+    d: false,
+    shift: false
 
-                if (permission === 'granted') {
-                    console.log('Sensor activado');
-                }
+};
 
-            })
-            .catch(function (error) {
-                console.error(error);
-            });
 
-    } else {
+/* =====================================================
+   PRESIONAR TECLA
+===================================================== */
 
-        console.log('Movimiento del celular activado');
+document.addEventListener(
+    'keydown',
+    function (event) {
+
+        const tecla =
+            event.key.toLowerCase();
+
+
+        if (tecla === 'w') {
+
+            teclas.w = true;
+
+            event.preventDefault();
+
+        }
+
+
+        if (tecla === 's') {
+
+            teclas.s = true;
+
+            event.preventDefault();
+
+        }
+
+
+        if (tecla === 'a') {
+
+            teclas.a = true;
+
+            event.preventDefault();
+
+        }
+
+
+        if (tecla === 'd') {
+
+            teclas.d = true;
+
+            event.preventDefault();
+
+        }
+
+
+        if (event.key === 'Shift') {
+
+            teclas.shift = true;
+
+        }
 
     }
+);
 
-    this.style.display = 'none';
-});
+
+/* =====================================================
+   SOLTAR TECLA
+===================================================== */
+
+document.addEventListener(
+    'keyup',
+    function (event) {
+
+        const tecla =
+            event.key.toLowerCase();
+
+
+        if (tecla === 'w') {
+
+            teclas.w = false;
+
+        }
+
+
+        if (tecla === 's') {
+
+            teclas.s = false;
+
+        }
+
+
+        if (tecla === 'a') {
+
+            teclas.a = false;
+
+        }
+
+
+        if (tecla === 'd') {
+
+            teclas.d = false;
+
+        }
+
+
+        if (event.key === 'Shift') {
+
+            teclas.shift = false;
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   COMPONENTE DE MOVIMIENTO
+===================================================== */
+
+AFRAME.registerComponent(
+    'teclado-movimiento',
+    {
+
+        tick: function (time, delta) {
+
+            const camera =
+                document.querySelector('#camera');
+
+
+            if (!camera) {
+
+                return;
+
+            }
+
+
+            const posicion =
+                camera.object3D.position;
+
+            const rotacion =
+                camera.object3D.rotation;
+
+
+            /* ==========================================
+               VELOCIDAD
+            ========================================== */
+
+            let velocidad =
+                0.005;
+
+
+            /* SHIFT = CORRER */
+
+            if (teclas.shift) {
+
+                velocidad =
+                    0.012;
+
+            }
+
+
+            /*
+             * delta está en milisegundos.
+             * Lo convertimos a una velocidad estable.
+             */
+
+            const movimiento =
+                velocidad * delta;
+
+
+            /* ==========================================
+               DIRECCIÓN HACIA DONDE MIRA
+            ========================================== */
+
+            const direccionX =
+                -Math.sin(rotacion.y);
+
+            const direccionZ =
+                -Math.cos(rotacion.y);
+
+
+            /* ==========================================
+               W = AVANZAR
+            ========================================== */
+
+            if (teclas.w) {
+
+                posicion.x +=
+                    direccionX * movimiento;
+
+                posicion.z +=
+                    direccionZ * movimiento;
+
+            }
+
+
+            /* ==========================================
+               S = RETROCEDER
+            ========================================== */
+
+            if (teclas.s) {
+
+                posicion.x -=
+                    direccionX * movimiento;
+
+                posicion.z -=
+                    direccionZ * movimiento;
+
+            }
+
+
+            /* ==========================================
+               A = IZQUIERDA
+            ========================================== */
+
+            if (teclas.a) {
+
+                posicion.x -=
+                    Math.cos(rotacion.y) *
+                    movimiento;
+
+                posicion.z +=
+                    Math.sin(rotacion.y) *
+                    movimiento;
+
+            }
+
+
+            /* ==========================================
+               D = DERECHA
+            ========================================== */
+
+            if (teclas.d) {
+
+                posicion.x +=
+                    Math.cos(rotacion.y) *
+                    movimiento;
+
+                posicion.z -=
+                    Math.sin(rotacion.y) *
+                    movimiento;
+
+            }
+
+
+            /* ==========================================
+               MANTENER ALTURA
+            ========================================== */
+
+            posicion.y = 3;
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   ACTIVAR MOVIMIENTO DEL TECLADO
+===================================================== */
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        const camera =
+            document.querySelector('#camera');
+
+
+        if (camera) {
+
+            camera.setAttribute(
+                'teclado-movimiento',
+                ''
+            );
+
+        }
+
+    }
+);
+
+
+/* =====================================================
+   SENSOR DE MOVIMIENTO DEL CELULAR
+===================================================== */
+
+document.addEventListener(
+    'DOMContentLoaded',
+    function () {
+
+        const boton =
+            document.querySelector(
+                '#activar-sensores'
+            );
+
+
+        if (!boton) {
+
+            return;
+
+        }
+
+
+        boton.addEventListener(
+            'click',
+            async function () {
+
+
+                /* =====================================
+                   iPhone / iPad
+                ===================================== */
+
+                if (
+                    typeof DeviceOrientationEvent !==
+                    'undefined' &&
+
+                    typeof DeviceOrientationEvent
+                        .requestPermission ===
+                        'function'
+                ) {
+
+                    try {
+
+                        const permiso =
+                            await
+                            DeviceOrientationEvent
+                                .requestPermission();
+
+
+                        if (
+                            permiso ===
+                            'granted'
+                        ) {
+
+                            console.log(
+                                'Sensores activados.'
+                            );
+
+                            boton.style.display =
+                                'none';
+
+                        } else {
+
+                            alert(
+                                'No se concedió permiso para usar el movimiento del dispositivo.'
+                            );
+
+                        }
+
+                    } catch (error) {
+
+                        console.error(
+                            'Error con el sensor:',
+                            error
+                        );
+
+                    }
+
+                }
+
+
+                /* =====================================
+                   Android
+                ===================================== */
+
+                else {
+
+                    console.log(
+                        'Movimiento del celular disponible.'
+                    );
+
+                    boton.style.display =
+                        'none';
+
+                }
+
+            }
+
+        );
+
+    }
+);
+
+
+/* =====================================================
+   EVITAR QUE EL TECLADO SE QUEDE PRESIONADO
+   CUANDO SE PIERDE EL FOCO
+===================================================== */
+
+window.addEventListener(
+    'blur',
+    function () {
+
+        teclas.w = false;
+        teclas.s = false;
+        teclas.a = false;
+        teclas.d = false;
+        teclas.shift = false;
+
+    }
+);
+
+
+/* =====================================================
+   MENSAJE DE AYUDA EN CONSOLA
+===================================================== */
+
+console.log(
+    'Museo Virtual iniciado.'
+);
+
+console.log(
+    'Controles: W A S D para moverse.'
+);
+
+console.log(
+    'SHIFT + W/A/S/D para correr.'
+);
+
+console.log(
+    'Mouse Bluetooth para interactuar.'
+);
+
+console.log(
+    'Movimiento del celular para mirar.'
+);
 
 
 </script>
+
 
 </body>
 </html>
