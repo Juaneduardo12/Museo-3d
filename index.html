@@ -3,34 +3,36 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
     <title>Museo Virtual de Tecnología</title>
 
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
 
     <style>
+        html,
         body {
             margin: 0;
+            padding: 0;
+            width: 100%;
+            height: 100%;
             overflow: hidden;
             font-family: Arial, sans-serif;
+            background: #101820;
         }
-
-        /* ==========================================
-           BOTÓN PARA ACTIVAR LOS SENSORES
-        ========================================== */
 
         #activar-sensores {
             position: fixed;
-            z-index: 9999;
+            z-index: 99999;
             top: 20px;
             left: 50%;
             transform: translateX(-50%);
 
-            padding: 14px 22px;
+            padding: 14px 24px;
 
             border: none;
-            border-radius: 10px;
+            border-radius: 12px;
 
             background: #00a8ff;
             color: white;
@@ -38,13 +40,43 @@
             font-size: 16px;
             font-weight: bold;
 
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.4);
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
 
             cursor: pointer;
         }
 
+        #activar-sensores:hover {
+            background: #008ed6;
+        }
+
         #activar-sensores:active {
             transform: translateX(-50%) scale(0.95);
+        }
+
+        #ayuda {
+            position: fixed;
+            z-index: 9998;
+            left: 15px;
+            bottom: 15px;
+
+            padding: 10px 14px;
+
+            background: rgba(0, 0, 0, 0.7);
+            color: white;
+
+            border-radius: 8px;
+
+            font-size: 13px;
+
+            pointer-events: none;
+        }
+
+        @media (max-width: 700px) {
+
+            #ayuda {
+                font-size: 11px;
+                max-width: 220px;
+            }
         }
     </style>
 </head>
@@ -53,20 +85,57 @@
 <body>
 
 
+<!-- ========================================================= -->
+<!-- BOTÓN DE SENSORES -->
+<!-- ========================================================= -->
+
+<button id="activar-sensores">
+    📱 ACTIVAR MOVIMIENTO DEL CELULAR
+</button>
+
+
+<!-- ========================================================= -->
+<!-- AYUDA -->
+<!-- ========================================================= -->
+
+<div id="ayuda">
+    🖱️ Mouse: mirar / interactuar<br>
+    ⌨️ W A S D: moverse<br>
+    🏃 SHIFT: correr<br>
+    📱 Celular: mover para mirar
+</div>
+
+
 <a-scene
+
+    id="museo"
+
     background="color: #101820"
+
+    renderer="
+        antialias: true;
+        colorManagement: true;
+        physicallyCorrectLights: true
+    "
+
     cursor="rayOrigin: mouse"
-    raycaster="objects: .clickable"
+
+    raycaster="
+        objects: .clickable;
+        far: 50
+    "
+
     shadow="type: pcfsoft">
 
 
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
     <!-- RECURSOS -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
 
     <a-assets>
 
-        <!-- TEXTURA DE LADRILLO -->
+
+        <!-- TEXTURA -->
 
         <img
             id="textura-ladrillo"
@@ -74,202 +143,168 @@
             crossorigin="anonymous">
 
 
-        <!-- ================= ROBOT ================= -->
+        <!-- ===================================================== -->
+        <!-- ROBOT -->
+        <!-- ===================================================== -->
 
         <a-asset-item
             id="tinker-obj_robot_bienvenido"
-            src="assests/tinker_robot_bienvenido.obj"
-            crossorigin="anonymous">
+            src="assests/tinker_robot_bienvenido.obj">
         </a-asset-item>
 
         <a-asset-item
             id="tinker-mtl_robot_bienvenido"
-            src="assests/obj_robot_bienvenido.mtl"
-            crossorigin="anonymous">
+            src="assests/obj_robot_bienvenido.mtl">
         </a-asset-item>
 
 
-        <!-- ================= ARDUINO 1 ================= -->
+        <!-- ===================================================== -->
+        <!-- ARDUINO -->
+        <!-- ===================================================== -->
 
         <a-asset-item
             id="tinker-obj_arduino_1"
-            src="assests/tinker_arduino1.obj"
-            crossorigin="anonymous">
+            src="assests/tinker_arduino1.obj">
         </a-asset-item>
 
         <a-asset-item
             id="tinker-mtl_arduino_1"
-            src="assests/obj_arduino1.mtl"
-            crossorigin="anonymous">
+            src="assests/obj_arduino1.mtl">
         </a-asset-item>
 
 
-        <!-- ================= ARDUINO 2 ================= -->
-
         <a-asset-item
             id="tinker-obj_arduino_2"
-            src="assests/tinker_arduino2.obj"
-            crossorigin="anonymous">
+            src="assests/tinker_arduino2.obj">
         </a-asset-item>
 
         <a-asset-item
             id="tinker-mtl_arduino_2"
-            src="assests/obj_arduino2.mtl"
-            crossorigin="anonymous">
+            src="assests/obj_arduino2.mtl">
         </a-asset-item>
 
 
-        <!-- ================= ARDUINO 3 ================= -->
-
         <a-asset-item
             id="tinker-obj_arduino_3"
-            src="assests/tinker_arduino3.obj"
-            crossorigin="anonymous">
+            src="assests/tinker_arduino3.obj">
         </a-asset-item>
 
         <a-asset-item
             id="tinker-mtl_arduino_3"
-            src="assests/obj_arduino3.mtl"
-            crossorigin="anonymous">
+            src="assests/obj_arduino3.mtl">
         </a-asset-item>
 
 
-        <!-- ================= ARDUINO 4 ================= -->
-
         <a-asset-item
             id="tinker-obj_arduino_4"
-            src="assests/tinker_arduino4.obj"
-            crossorigin="anonymous">
+            src="assests/tinker_arduino4.obj">
         </a-asset-item>
 
         <a-asset-item
             id="tinker-mtl_arduino_4"
-            src="assests/obj_arduino4.mtl"
-            crossorigin="anonymous">
+            src="assests/obj_arduino4.mtl">
         </a-asset-item>
 
 
-        <!-- ================= MANTENIMIENTO 1 ================= -->
+        <!-- ===================================================== -->
+        <!-- MANTENIMIENTO -->
+        <!-- ===================================================== -->
 
         <a-asset-item
             id="tinker-obj_mantenimiento_1"
-            src="assests/tinker_mantenimiento_1.obj"
-            crossorigin="anonymous">
+            src="assests/tinker_mantenimiento_1.obj">
         </a-asset-item>
 
         <a-asset-item
             id="tinker-mtl_mantenimiento_1"
-            src="assests/obj_mantenimiento_1.mtl"
-            crossorigin="anonymous">
+            src="assests/obj_mantenimiento_1.mtl">
         </a-asset-item>
 
 
-        <!-- ================= MANTENIMIENTO 2 ================= -->
-
         <a-asset-item
             id="tinker-obj_mantenimiento_2"
-            src="assests/tinker_mantenimiento_2.obj"
-            crossorigin="anonymous">
+            src="assests/tinker_mantenimiento_2.obj">
         </a-asset-item>
 
         <a-asset-item
             id="tinker-mtl_mantenimiento_2"
-            src="assests/obj_mantenimiento_2.mtl"
-            crossorigin="anonymous">
+            src="assests/obj_mantenimiento_2.mtl">
         </a-asset-item>
 
 
-        <!-- ================= MANTENIMIENTO 3 ================= -->
-
         <a-asset-item
             id="tinker-obj_mantenimiento_3"
-            src="assests/tinker_mantenimiento_3.obj"
-            crossorigin="anonymous">
+            src="assests/tinker_mantenimiento_3.obj">
         </a-asset-item>
 
         <a-asset-item
             id="tinker-mtl_mantenimiento_3"
-            src="assests/obj_mantenimiento_3.mtl"
-            crossorigin="anonymous">
+            src="assests/obj_mantenimiento_3.mtl">
         </a-asset-item>
 
 
-        <!-- ================= MANTENIMIENTO 4 ================= -->
-
         <a-asset-item
             id="tinker-obj_mantenimiento_4"
-            src="assests/tinker_mantenimiento_4.obj"
-            crossorigin="anonymous">
+            src="assests/tinker_mantenimiento_4.obj">
         </a-asset-item>
 
         <a-asset-item
             id="tinker-mtl_mantenimiento_4"
-            src="assests/obj_mantenimiento_4.mtl"
-            crossorigin="anonymous">
+            src="assests/obj_mantenimiento_4.mtl">
         </a-asset-item>
 
 
-        <!-- ================= MODELO 3D 1 ================= -->
+        <!-- ===================================================== -->
+        <!-- MODELOS 3D -->
+        <!-- ===================================================== -->
 
         <a-asset-item
             id="tinker-obj_modelo_3d_1"
-            src="assests/tinker_modelo_3d_1.obj"
-            crossorigin="anonymous">
+            src="assests/tinker_modelo_3d_1.obj">
         </a-asset-item>
 
         <a-asset-item
             id="tinker-mtl_modelo_3d_1"
-            src="assests/obj_modelo_3d_1.mtl"
-            crossorigin="anonymous">
+            src="assests/obj_modelo_3d_1.mtl">
         </a-asset-item>
 
 
-        <!-- ================= MODELO 3D 2 ================= -->
-
         <a-asset-item
             id="tinker-obj_modelo_3d_2"
-            src="assests/tinker_modelo_3d_2.obj"
-            crossorigin="anonymous">
+            src="assests/tinker_modelo_3d_2.obj">
         </a-asset-item>
 
         <a-asset-item
             id="tinker-mtl_modelo_3d_2"
-            src="assests/obj_modelo_3d_2.mtl"
-            crossorigin="anonymous">
+            src="assests/obj_modelo_3d_2.mtl">
         </a-asset-item>
 
 
-        <!-- ================= MODELO 3D 3 ================= -->
-
         <a-asset-item
             id="tinker-obj_modelo_3d_3"
-            src="assests/tinker_modelo_3d_3.obj"
-            crossorigin="anonymous">
+            src="assests/tinker_modelo_3d_3.obj">
         </a-asset-item>
 
         <a-asset-item
             id="tinker-mtl_modelo_3d_3"
-            src="assests/obj_modelo_3d_3.mtl"
-            crossorigin="anonymous">
+            src="assests/obj_modelo_3d_3.mtl">
         </a-asset-item>
 
 
-        <!-- ================= MODELO 3D 4 ================= -->
-
         <a-asset-item
             id="tinker-obj_modelo_3d_4"
-            src="assests/tinker_modelo_3d_4.obj"
-            crossorigin="anonymous">
+            src="assests/tinker_modelo_3d_4.obj">
         </a-asset-item>
 
         <a-asset-item
             id="tinker-mtl_modelo_3d_4"
-            src="assests/obj_modelo_3d_4.mtl"
-            crossorigin="anonymous">
+            src="assests/obj_modelo_3d_4.mtl">
         </a-asset-item>
 
 
-        <!-- ================= IMÁGENES ================= -->
+        <!-- ===================================================== -->
+        <!-- IMÁGENES -->
+        <!-- ===================================================== -->
 
         <img id="img-sistema_1" src="img/sistema_1.png">
         <img id="img-sistema_2" src="img/sistema_2.png">
@@ -279,82 +314,132 @@
     </a-assets>
 
 
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
     <!-- ILUMINACIÓN -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
 
     <a-light
         type="ambient"
         color="#FFFFFF"
-        intensity="0.7">
+        intensity="0.75">
     </a-light>
+
 
     <a-light
         type="directional"
-        position="0 15 10"
-        intensity="0.8"
+        position="0 15 5"
+        intensity="1"
         castShadow="true">
     </a-light>
 
+
     <a-light
         type="point"
-        position="0 6 5"
-        intensity="1.2"
-        distance="30"
-        color="#FFFFFF">
+        position="0 7 -20"
+        intensity="1.5"
+        distance="35">
     </a-light>
 
 
-    <!-- ================================================= -->
+    <a-light
+        type="point"
+        position="-19 7 -30"
+        intensity="1.2"
+        distance="25"
+        color="#00FFFF">
+    </a-light>
+
+
+    <a-light
+        type="point"
+        position="19 7 -30"
+        intensity="1.2"
+        distance="25"
+        color="#00FF88">
+    </a-light>
+
+
+    <a-light
+        type="point"
+        position="-19 7 -60"
+        intensity="1.2"
+        distance="25"
+        color="#E056FD">
+    </a-light>
+
+
+    <a-light
+        type="point"
+        position="19 7 -60"
+        intensity="1.2"
+        distance="25"
+        color="#FFD166">
+    </a-light>
+
+
+
+    <!-- ========================================================= -->
     <!-- PISO GENERAL -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
 
     <a-plane
+
         position="0 0 -35"
+
         rotation="-90 0 0"
+
         width="70"
+
         height="80"
+
         material="
             src: #textura-ladrillo;
             repeat: 20 25;
             roughness: 0.9
         "
+
         shadow>
     </a-plane>
 
 
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
     <!-- PASILLO CENTRAL -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
 
     <a-plane
-        position="0 0.03 -25"
+        position="0 0.03 -35"
         rotation="-90 0 0"
-        width="14"
-        height="50"
+        width="16"
+        height="80"
         color="#303B46">
     </a-plane>
 
-    <a-box
-        position="-6.9 0.08 -25"
-        width="0.12"
-        height="0.05"
-        depth="50"
-        color="#00FFFF">
-    </a-box>
+
+    <!-- BORDES DEL PASILLO -->
 
     <a-box
-        position="6.9 0.08 -25"
+        position="-8 0.08 -35"
         width="0.12"
-        height="0.05"
-        depth="50"
+        height="0.08"
+        depth="80"
         color="#00FFFF">
     </a-box>
 
 
-    <!-- ================================================= -->
+    <a-box
+        position="8 0.08 -35"
+        width="0.12"
+        height="0.08"
+        depth="80"
+        color="#00FFFF">
+    </a-box>
+
+
+
+    <!-- ========================================================= -->
     <!-- TECHO -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
 
     <a-box
         position="0 12 -35"
@@ -365,66 +450,79 @@
     </a-box>
 
 
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
     <!-- PAREDES EXTERIORES -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
 
     <a-box
         position="0 6 5"
         width="70"
         height="12"
         depth="0.5"
+
         material="
             src: #textura-ladrillo;
             repeat: 14 3;
             roughness: 0.85
         "
+
         shadow>
     </a-box>
+
 
     <a-box
         position="0 6 -75"
         width="70"
         height="12"
         depth="0.5"
+
         material="
             src: #textura-ladrillo;
             repeat: 14 3;
             roughness: 0.85
         "
+
         shadow>
     </a-box>
+
 
     <a-box
         position="-35 6 -35"
         width="0.5"
         height="12"
         depth="80"
+
         material="
             src: #textura-ladrillo;
             repeat: 3 16;
             roughness: 0.85
         "
+
         shadow>
     </a-box>
+
 
     <a-box
         position="35 6 -35"
         width="0.5"
         height="12"
         depth="80"
+
         material="
             src: #textura-ladrillo;
             repeat: 3 16;
             roughness: 0.85
         "
+
         shadow>
     </a-box>
 
 
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
     <!-- ENTRADA PRINCIPAL -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
 
     <a-box
         position="-7 5 4.5"
@@ -435,6 +533,7 @@
         shadow>
     </a-box>
 
+
     <a-box
         position="7 5 4.5"
         width="1"
@@ -443,6 +542,7 @@
         color="#00A8FF"
         shadow>
     </a-box>
+
 
     <a-box
         position="0 10 4.5"
@@ -453,13 +553,6 @@
         shadow>
     </a-box>
 
-    <a-box
-        position="0 10.7 4.5"
-        width="11"
-        height="0.15"
-        depth="0.2"
-        color="#00FFFF">
-    </a-box>
 
     <a-text
         value="MUSEO VIRTUAL"
@@ -468,6 +561,7 @@
         color="#FFFFFF"
         width="18">
     </a-text>
+
 
     <a-text
         value="DE TECNOLOGIA"
@@ -478,9 +572,10 @@
     </a-text>
 
 
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
     <!-- RECEPCIÓN -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
 
     <a-plane
         position="0 0.05 0"
@@ -490,12 +585,14 @@
         color="#18232D">
     </a-plane>
 
+
     <a-ring
         position="0 4 -1"
         radius-inner="1.2"
         radius-outer="1.5"
         color="#00FFFF">
     </a-ring>
+
 
     <a-text
         value="BIENVENIDO"
@@ -504,6 +601,7 @@
         color="#FFFFFF"
         width="10">
     </a-text>
+
 
     <a-text
         value="EXPLORA • APRENDE • DESCUBRE"
@@ -514,21 +612,31 @@
     </a-text>
 
 
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
     <!-- ROBOT -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
 
     <a-entity
-        obj-model="obj: #tinker-obj_robot_bienvenido; mtl: #tinker-mtl_robot_bienvenido"
+
+        obj-model="
+            obj: #tinker-obj_robot_bienvenido;
+            mtl: #tinker-mtl_robot_bienvenido
+        "
+
         position="4 0 -1"
+
         scale="0.08 0.08 0.08"
+
         rotation="-90 150 0">
+
     </a-entity>
 
 
-    <!-- ================================================= -->
-    <!-- PASILLO -->
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
+    <!-- PAREDES DEL PASILLO -->
+    <!-- ========================================================= -->
 
     <a-box
         position="-8 6 -18"
@@ -538,6 +646,7 @@
         color="#34414D">
     </a-box>
 
+
     <a-box
         position="-8 6 -55"
         width="0.5"
@@ -546,6 +655,7 @@
         color="#34414D">
     </a-box>
 
+
     <a-box
         position="8 6 -18"
         width="0.5"
@@ -553,6 +663,7 @@
         depth="35"
         color="#34414D">
     </a-box>
+
 
     <a-box
         position="8 6 -55"
@@ -563,9 +674,10 @@
     </a-box>
 
 
-    <!-- ================================================= -->
-    <!-- LUCES PASILLO -->
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
+    <!-- LUCES DEL PASILLO -->
+    <!-- ========================================================= -->
 
     <a-box
         position="0 11.5 -8"
@@ -575,6 +687,7 @@
         color="#FFFFFF">
     </a-box>
 
+
     <a-box
         position="0 11.5 -18"
         width="5"
@@ -582,6 +695,7 @@
         depth="0.5"
         color="#FFFFFF">
     </a-box>
+
 
     <a-box
         position="0 11.5 -28"
@@ -591,6 +705,7 @@
         color="#FFFFFF">
     </a-box>
 
+
     <a-box
         position="0 11.5 -38"
         width="5"
@@ -599,26 +714,49 @@
         color="#FFFFFF">
     </a-box>
 
+
+    <a-box
+        position="0 11.5 -48"
+        width="5"
+        height="0.12"
+        depth="0.5"
+        color="#FFFFFF">
+    </a-box>
+
+
+    <a-box
+        position="0 11.5 -58"
+        width="5"
+        height="0.12"
+        depth="0.5"
+        color="#FFFFFF">
+    </a-box>
+
+
     <a-text
         value="EXPLORA NUESTRAS SALAS"
-        position="0 5 -12"
+        position="0 5 -10"
         align="center"
         color="#FFFFFF"
         width="9">
     </a-text>
 
+
     <a-text
         value="↓"
-        position="0 3.5 -14"
+        position="0 3.5 -13"
         align="center"
         color="#00FFFF"
         width="8">
     </a-text>
 
 
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
+    <!-- ========================================================= -->
     <!-- SALA 1 - ARDUINO -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
+    <!-- ========================================================= -->
 
     <a-plane
         position="-19 0.05 -24"
@@ -628,125 +766,120 @@
         color="#123B5D">
     </a-plane>
 
+
+    <!-- PARED TRASERA -->
+
     <a-box
         position="-19 6 -35"
         width="20"
         height="12"
         depth="0.5"
+
         material="
             src: #textura-ladrillo;
             repeat: 4 3
         "
+
         shadow>
     </a-box>
+
+
+    <!-- PARED EXTERIOR -->
 
     <a-box
         position="-29 6 -24"
         width="0.5"
         height="12"
         depth="22"
+
         material="
             src: #textura-ladrillo;
-            repeat: 3 5
+            repeat: 1 5
         "
+
         shadow>
     </a-box>
 
 
-    <!-- ENTRADA SALA ARDUINO -->
+    <!-- PARED DEL PASILLO CON ENTRADA -->
 
     <a-box
         position="-27 6 -13"
-        width="5"
+        width="4"
         height="12"
         depth="0.5"
-        material="src: #textura-ladrillo; repeat: 1 3">
+
+        material="
+            src: #textura-ladrillo;
+            repeat: 1 3
+        ">
     </a-box>
+
 
     <a-box
         position="-11 6 -13"
-        width="5"
+        width="4"
         height="12"
         depth="0.5"
-        material="src: #textura-ladrillo; repeat: 1 3">
+
+        material="
+            src: #textura-ladrillo;
+            repeat: 1 3
+        ">
     </a-box>
+
+
+    <!-- PARTE SUPERIOR DE LA ENTRADA -->
 
     <a-box
         position="-19 10.5 -13"
-        width="16"
+        width="12"
         height="3"
         depth="0.5"
         color="#087EA4">
     </a-box>
 
+
+    <!-- MARCO -->
+
     <a-box
         position="-24.5 5 -13"
-        width="0.7"
+        width="0.5"
         height="10"
-        depth="0.8"
+        depth="0.7"
         color="#05668D">
     </a-box>
+
 
     <a-box
         position="-13.5 5 -13"
-        width="0.7"
+        width="0.5"
         height="10"
-        depth="0.8"
+        depth="0.7"
         color="#05668D">
     </a-box>
+
 
     <a-box
         position="-19 10 -13"
-        width="12"
-        height="0.7"
-        depth="0.8"
+        width="11"
+        height="0.5"
+        depth="0.7"
         color="#05668D">
     </a-box>
 
-    <a-box
-        position="-19 10.6 -13"
-        width="10"
-        height="0.15"
-        depth="0.15"
-        color="#00FFFF">
-    </a-box>
 
     <a-text
         value="SALA ARDUINO"
-        position="-19 8 -12.8"
+        position="-19 8 -12.7"
         align="center"
         color="#00FFFF"
-        width="9">
+        width="8">
     </a-text>
 
 
-    <!-- DECORACIÓN -->
 
-    <a-box
-        position="-28 6 -34"
-        width="1.2"
-        height="12"
-        depth="1.2"
-        color="#05668D"
-        shadow>
-    </a-box>
-
-    <a-box
-        position="-10 6 -34"
-        width="1.2"
-        height="12"
-        depth="1.2"
-        color="#05668D"
-        shadow>
-    </a-box>
-
-    <a-box
-        position="-19 11 -34"
-        width="19"
-        height="0.7"
-        depth="1"
-        color="#05668D">
-    </a-box>
+    <!-- PANEL TRASERO -->
 
     <a-box
         position="-19 6 -33.3"
@@ -756,6 +889,7 @@
         color="#0B2239">
     </a-box>
 
+
     <a-text
         value="TECNOLOGIA ARDUINO"
         position="-19 8.5 -33.1"
@@ -763,6 +897,7 @@
         color="#00FFFF"
         width="9">
     </a-text>
+
 
     <a-text
         value="INNOVACION • ELECTRONICA • ROBOTICA"
@@ -773,7 +908,10 @@
     </a-text>
 
 
+
+    <!-- ========================================================= -->
     <!-- ARDUINO 1 -->
+    <!-- ========================================================= -->
 
     <a-cylinder
         position="-24 1 -20"
@@ -782,19 +920,34 @@
         color="#17202A">
     </a-cylinder>
 
+
     <a-entity
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="ARDUINO UNO"
+
         data-info="Arduino UNO es una placa de desarrollo basada en un microcontrolador. Se utiliza para crear proyectos de electrónica, robótica y automatización."
+
         data-panel-x="-24"
         data-panel-y="4.8"
         data-panel-z="-17"
-        obj-model="obj: #tinker-obj_arduino_1; mtl: #tinker-mtl_arduino_1"
+
+        obj-model="
+            obj: #tinker-obj_arduino_1;
+            mtl: #tinker-mtl_arduino_1
+        "
+
         position="-22.5 2.5 -17"
+
         scale="0.03 0.03 0.03"
+
         rotation="-90 90 0">
+
     </a-entity>
+
 
 
     <!-- ARDUINO 2 -->
@@ -806,19 +959,34 @@
         color="#17202A">
     </a-cylinder>
 
+
     <a-entity
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="ARDUINO Y ELECTRÓNICA"
+
         data-info="Este modelo representa una aplicación de Arduino. Puede utilizar sensores, actuadores, LEDs y otros componentes electrónicos para crear sistemas interactivos."
+
         data-panel-x="-14"
         data-panel-y="4.8"
         data-panel-z="-17"
-        obj-model="obj: #tinker-obj_arduino_2; mtl: #tinker-mtl_arduino_2"
+
+        obj-model="
+            obj: #tinker-obj_arduino_2;
+            mtl: #tinker-mtl_arduino_2
+        "
+
         position="-14 1.5 -18.5"
+
         scale="0.05 0.05 0.05"
+
         rotation="0 90 0">
+
     </a-entity>
+
 
 
     <!-- ARDUINO 3 -->
@@ -830,19 +998,34 @@
         color="#17202A">
     </a-cylinder>
 
+
     <a-entity
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="PROYECTO CON ARDUINO"
+
         data-info="Arduino permite programar dispositivos electrónicos mediante código. Es ampliamente utilizado en educación, prototipos y proyectos de automatización."
+
         data-panel-x="-24"
         data-panel-y="4.8"
         data-panel-z="-26"
-        obj-model="obj: #tinker-obj_arduino_3; mtl: #tinker-mtl_arduino_3"
+
+        obj-model="
+            obj: #tinker-obj_arduino_3;
+            mtl: #tinker-mtl_arduino_3
+        "
+
         position="-24.5 2.5 -31.5"
+
         scale="0.05 0.05 0.05"
+
         rotation="-90 50 0">
+
     </a-entity>
+
 
 
     <!-- ARDUINO 4 -->
@@ -854,19 +1037,34 @@
         color="#17202A">
     </a-cylinder>
 
+
     <a-entity
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="AUTOMATIZACIÓN"
+
         data-info="Los proyectos con Arduino pueden automatizar procesos mediante sensores, motores, luces y otros dispositivos."
+
         data-panel-x="-14"
         data-panel-y="4.8"
         data-panel-z="-26"
-        obj-model="obj: #tinker-obj_arduino_4; mtl: #tinker-mtl_arduino_4"
+
+        obj-model="
+            obj: #tinker-obj_arduino_4;
+            mtl: #tinker-mtl_arduino_4
+        "
+
         position="-11.5 2.5 -30"
+
         scale="0.05 0.05 0.05"
+
         rotation="-90 80 0">
+
     </a-entity>
+
 
 
     <!-- LUCES -->
@@ -877,17 +1075,20 @@
         color="#00FFFF">
     </a-cylinder>
 
+
     <a-cylinder position="-14 2.15 -20"
         radius="1.55"
         height="0.08"
         color="#00FFFF">
     </a-cylinder>
 
+
     <a-cylinder position="-24 2.15 -29"
         radius="1.55"
         height="0.08"
         color="#00FFFF">
     </a-cylinder>
+
 
     <a-cylinder position="-14 2.15 -29"
         radius="1.55"
@@ -896,9 +1097,12 @@
     </a-cylinder>
 
 
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
+    <!-- ========================================================= -->
     <!-- SALA 2 - MANTENIMIENTO -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
+    <!-- ========================================================= -->
 
     <a-plane
         position="19 0.05 -24"
@@ -908,27 +1112,37 @@
         color="#164A35">
     </a-plane>
 
+
+    <!-- PARED TRASERA -->
+
     <a-box
         position="19 6 -35"
         width="20"
         height="12"
         depth="0.5"
+
         material="
             src: #textura-ladrillo;
             repeat: 4 3
         "
+
         shadow>
     </a-box>
+
+
+    <!-- PARED EXTERIOR -->
 
     <a-box
         position="29 6 -24"
         width="0.5"
         height="12"
         depth="22"
+
         material="
             src: #textura-ladrillo;
-            repeat: 3 5
+            repeat: 1 5
         "
+
         shadow>
     </a-box>
 
@@ -937,94 +1151,81 @@
 
     <a-box
         position="11 6 -13"
-        width="5"
+        width="4"
         height="12"
         depth="0.5"
-        material="src: #textura-ladrillo; repeat: 1 3">
+
+        material="
+            src: #textura-ladrillo;
+            repeat: 1 3
+        ">
     </a-box>
+
 
     <a-box
         position="27 6 -13"
-        width="5"
+        width="4"
         height="12"
         depth="0.5"
-        material="src: #textura-ladrillo; repeat: 1 3">
+
+        material="
+            src: #textura-ladrillo;
+            repeat: 1 3
+        ">
     </a-box>
+
+
+    <!-- PARTE SUPERIOR -->
 
     <a-box
         position="19 10.5 -13"
-        width="16"
+        width="12"
         height="3"
         depth="0.5"
         color="#1E8449">
     </a-box>
 
+
+    <!-- MARCO -->
+
     <a-box
         position="13.5 5 -13"
-        width="0.7"
+        width="0.5"
         height="10"
-        depth="0.8"
+        depth="0.7"
         color="#196F3D">
     </a-box>
+
 
     <a-box
         position="24.5 5 -13"
-        width="0.7"
+        width="0.5"
         height="10"
-        depth="0.8"
+        depth="0.7"
         color="#196F3D">
     </a-box>
+
 
     <a-box
         position="19 10 -13"
-        width="12"
-        height="0.7"
-        depth="0.8"
+        width="11"
+        height="0.5"
+        depth="0.7"
         color="#196F3D">
     </a-box>
 
-    <a-box
-        position="19 10.6 -13"
-        width="10"
-        height="0.15"
-        depth="0.15"
-        color="#00FF88">
-    </a-box>
 
     <a-text
         value="MANTENIMIENTO DE PC"
-        position="19 8 -12.8"
+        position="19 8 -12.7"
         align="center"
         color="#00FF88"
-        width="9">
+        width="8">
     </a-text>
 
 
-    <!-- DECORACIÓN -->
 
-    <a-box
-        position="28 6 -34"
-        width="1.2"
-        height="12"
-        depth="1.2"
-        color="#196F3D">
-    </a-box>
-
-    <a-box
-        position="10 6 -34"
-        width="1.2"
-        height="12"
-        depth="1.2"
-        color="#196F3D">
-    </a-box>
-
-    <a-box
-        position="19 11 -34"
-        width="19"
-        height="0.7"
-        depth="1"
-        color="#196F3D">
-    </a-box>
+    <!-- PANEL TRASERO -->
 
     <a-box
         position="19 6 -33.3"
@@ -1034,6 +1235,7 @@
         color="#0B3020">
     </a-box>
 
+
     <a-text
         value="MANTENIMIENTO DE PC"
         position="19 8.5 -33.1"
@@ -1042,6 +1244,7 @@
         width="9">
     </a-text>
 
+
     <a-text
         value="HARDWARE • DIAGNÓSTICO • SOPORTE"
         position="19 7.2 -33.1"
@@ -1049,6 +1252,7 @@
         color="#FFFFFF"
         width="5">
     </a-text>
+
 
 
     <!-- MANTENIMIENTO 1 -->
@@ -1060,19 +1264,34 @@
         color="#17202A">
     </a-cylinder>
 
+
     <a-entity
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="MANTENIMIENTO DE COMPUTADORA"
+
         data-info="El mantenimiento preventivo ayuda a conservar una computadora en buen estado. Incluye limpieza, revisión de componentes y comprobación del funcionamiento."
+
         data-panel-x="14"
         data-panel-y="4.8"
         data-panel-z="-17"
-        obj-model="obj: #tinker-obj_mantenimiento_1; mtl: #tinker-mtl_mantenimiento_1"
+
+        obj-model="
+            obj: #tinker-obj_mantenimiento_1;
+            mtl: #tinker-mtl_mantenimiento_1
+        "
+
         position="13.5 2.5 -19"
+
         scale="0.02 0.02 0.02"
+
         rotation="-90 180 0">
+
     </a-entity>
+
 
 
     <!-- MANTENIMIENTO 2 -->
@@ -1084,19 +1303,34 @@
         color="#17202A">
     </a-cylinder>
 
+
     <a-entity
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="LIMPIEZA DE HARDWARE"
+
         data-info="La limpieza interna elimina polvo y suciedad que pueden afectar ventiladores, disipadores y otros componentes."
+
         data-panel-x="24"
         data-panel-y="4.8"
         data-panel-z="-17"
-        obj-model="obj: #tinker-obj_mantenimiento_2; mtl: #tinker-mtl_mantenimiento_2"
+
+        obj-model="
+            obj: #tinker-obj_mantenimiento_2;
+            mtl: #tinker-mtl_mantenimiento_2
+        "
+
         position="23 2.5 -20"
+
         scale="0.02 0.02 0.02"
+
         rotation="-90 -90 0">
+
     </a-entity>
+
 
 
     <!-- MANTENIMIENTO 3 -->
@@ -1108,19 +1342,34 @@
         color="#17202A">
     </a-cylinder>
 
+
     <a-entity
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="DIAGNÓSTICO"
+
         data-info="El diagnóstico permite identificar fallas de hardware y software para determinar las acciones necesarias para reparar el equipo."
+
         data-panel-x="14"
         data-panel-y="4.8"
         data-panel-z="-26"
-        obj-model="obj: #tinker-obj_mantenimiento_3; mtl: #tinker-mtl_mantenimiento_3"
+
+        obj-model="
+            obj: #tinker-obj_mantenimiento_3;
+            mtl: #tinker-mtl_mantenimiento_3
+        "
+
         position="14 2.5 -29.5"
+
         scale="0.02 0.02 0.02"
+
         rotation="-90 180 0">
+
     </a-entity>
+
 
 
     <!-- MANTENIMIENTO 4 -->
@@ -1132,19 +1381,34 @@
         color="#17202A">
     </a-cylinder>
 
+
     <a-entity
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="SOPORTE TÉCNICO"
+
         data-info="El soporte técnico comprende actividades de mantenimiento, reparación, configuración y optimización de equipos de cómputo."
+
         data-panel-x="24"
         data-panel-y="4.8"
         data-panel-z="-26"
-        obj-model="obj: #tinker-obj_mantenimiento_4; mtl: #tinker-mtl_mantenimiento_4"
+
+        obj-model="
+            obj: #tinker-obj_mantenimiento_4;
+            mtl: #tinker-mtl_mantenimiento_4
+        "
+
         position="24.5 2.5 -31"
+
         scale="0.05 0.05 0.05"
+
         rotation="-90 -90 0">
+
     </a-entity>
+
 
 
     <!-- LUCES -->
@@ -1155,17 +1419,20 @@
         color="#00FF88">
     </a-cylinder>
 
+
     <a-cylinder position="24 2.15 -20"
         radius="1.55"
         height="0.08"
         color="#00FF88">
     </a-cylinder>
 
+
     <a-cylinder position="14 2.15 -29"
         radius="1.55"
         height="0.08"
         color="#00FF88">
     </a-cylinder>
+
 
     <a-cylinder position="24 2.15 -29"
         radius="1.55"
@@ -1174,9 +1441,12 @@
     </a-cylinder>
 
 
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
+    <!-- ========================================================= -->
     <!-- SALA 3 - MODELOS 3D -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
+    <!-- ========================================================= -->
 
     <a-plane
         position="-19 0.05 -55"
@@ -1186,27 +1456,37 @@
         color="#351B4D">
     </a-plane>
 
+
+    <!-- PARED TRASERA -->
+
     <a-box
         position="-19 6 -66"
         width="20"
         height="12"
         depth="0.5"
+
         material="
             src: #textura-ladrillo;
             repeat: 4 3
         "
+
         shadow>
     </a-box>
+
+
+    <!-- PARED EXTERIOR -->
 
     <a-box
         position="-29 6 -55"
         width="0.5"
         height="12"
         depth="22"
+
         material="
             src: #textura-ladrillo;
-            repeat: 3 5
+            repeat: 1 5
         "
+
         shadow>
     </a-box>
 
@@ -1215,94 +1495,81 @@
 
     <a-box
         position="-27 6 -44"
-        width="5"
+        width="4"
         height="12"
         depth="0.5"
-        material="src: #textura-ladrillo; repeat: 1 3">
+
+        material="
+            src: #textura-ladrillo;
+            repeat: 1 3
+        ">
     </a-box>
+
 
     <a-box
         position="-11 6 -44"
-        width="5"
+        width="4"
         height="12"
         depth="0.5"
-        material="src: #textura-ladrillo; repeat: 1 3">
+
+        material="
+            src: #textura-ladrillo;
+            repeat: 1 3
+        ">
     </a-box>
+
+
+    <!-- PARTE SUPERIOR -->
 
     <a-box
         position="-19 10.5 -44"
-        width="16"
+        width="12"
         height="3"
         depth="0.5"
         color="#8E44AD">
     </a-box>
 
+
+    <!-- MARCO -->
+
     <a-box
         position="-24.5 5 -44"
-        width="0.7"
+        width="0.5"
         height="10"
-        depth="0.8"
+        depth="0.7"
         color="#6C3483">
     </a-box>
+
 
     <a-box
         position="-13.5 5 -44"
-        width="0.7"
+        width="0.5"
         height="10"
-        depth="0.8"
+        depth="0.7"
         color="#6C3483">
     </a-box>
+
 
     <a-box
         position="-19 10 -44"
-        width="12"
-        height="0.7"
-        depth="0.8"
+        width="11"
+        height="0.5"
+        depth="0.7"
         color="#6C3483">
     </a-box>
 
-    <a-box
-        position="-19 10.6 -44"
-        width="10"
-        height="0.15"
-        depth="0.15"
-        color="#E056FD">
-    </a-box>
 
     <a-text
         value="MODELOS 3D"
-        position="-19 8 -43.8"
+        position="-19 8 -43.7"
         align="center"
         color="#E056FD"
-        width="9">
+        width="8">
     </a-text>
 
 
-    <!-- DECORACIÓN -->
 
-    <a-box
-        position="-28 6 -65"
-        width="1.2"
-        height="12"
-        depth="1.2"
-        color="#6C3483">
-    </a-box>
-
-    <a-box
-        position="-10 6 -65"
-        width="1.2"
-        height="12"
-        depth="1.2"
-        color="#6C3483">
-    </a-box>
-
-    <a-box
-        position="-19 11 -65"
-        width="19"
-        height="0.7"
-        depth="1"
-        color="#6C3483">
-    </a-box>
+    <!-- PANEL TRASERO -->
 
     <a-box
         position="-19 6 -64.3"
@@ -1312,6 +1579,7 @@
         color="#24102F">
     </a-box>
 
+
     <a-text
         value="MODELOS 3D"
         position="-19 8.5 -64.1"
@@ -1319,6 +1587,7 @@
         color="#E056FD"
         width="9">
     </a-text>
+
 
     <a-text
         value="DISEÑO • MODELADO • IMPRESIÓN 3D"
@@ -1329,7 +1598,8 @@
     </a-text>
 
 
-    <!-- MODELO 3D 1 -->
+
+    <!-- MODELO 1 -->
 
     <a-cylinder
         position="-24 1 -51"
@@ -1338,22 +1608,37 @@
         color="#24102F">
     </a-cylinder>
 
+
     <a-entity
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="MODELO 3D"
+
         data-info="Los modelos tridimensionales permiten representar objetos digitales en tres dimensiones. Pueden utilizarse para diseño, prototipos, videojuegos e impresión 3D."
+
         data-panel-x="-24"
         data-panel-y="4.8"
         data-panel-z="-48"
-        obj-model="obj: #tinker-obj_modelo_3d_1; mtl: #tinker-mtl_modelo_3d_1"
+
+        obj-model="
+            obj: #tinker-obj_modelo_3d_1;
+            mtl: #tinker-mtl_modelo_3d_1
+        "
+
         position="-24 2.5 -50"
+
         scale="0.03 0.03 0.03"
+
         rotation="-90 -30 0">
+
     </a-entity>
 
 
-    <!-- MODELO 3D 2 -->
+
+    <!-- MODELO 2 -->
 
     <a-cylinder
         position="-14 1 -51"
@@ -1362,22 +1647,37 @@
         color="#24102F">
     </a-cylinder>
 
+
     <a-entity
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="DISEÑO DIGITAL"
+
         data-info="El diseño digital permite crear objetos y escenarios mediante herramientas de modelado 3D."
+
         data-panel-x="-14"
         data-panel-y="4.8"
         data-panel-z="-48"
-        obj-model="obj: #tinker-obj_modelo_3d_2; mtl: #tinker-mtl_modelo_3d_2"
-        position="-9 2.5 -52.5"
+
+        obj-model="
+            obj: #tinker-obj_modelo_3d_2;
+            mtl: #tinker-mtl_modelo_3d_2
+        "
+
+        position="-14 2.5 -52.5"
+
         scale="0.08 0.08 0.08"
+
         rotation="-90 -30 0">
+
     </a-entity>
 
 
-    <!-- MODELO 3D 3 -->
+
+    <!-- MODELO 3 -->
 
     <a-cylinder
         position="-24 1 -60"
@@ -1386,22 +1686,37 @@
         color="#24102F">
     </a-cylinder>
 
+
     <a-entity
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="IMPRESIÓN 3D"
+
         data-info="La impresión 3D permite fabricar objetos físicos a partir de modelos digitales utilizando diferentes materiales."
+
         data-panel-x="-24"
         data-panel-y="4.8"
         data-panel-z="-57"
-        obj-model="obj: #tinker-obj_modelo_3d_3; mtl: #tinker-mtl_modelo_3d_3"
-        position="-26 4 -61"
+
+        obj-model="
+            obj: #tinker-obj_modelo_3d_3;
+            mtl: #tinker-mtl_modelo_3d_3
+        "
+
+        position="-24 4 -61"
+
         scale="0.05 0.05 0.05"
+
         rotation="90 200 0">
+
     </a-entity>
 
 
-    <!-- MODELO 3D 4 -->
+
+    <!-- MODELO 4 -->
 
     <a-cylinder
         position="-14 1 -60"
@@ -1410,19 +1725,34 @@
         color="#24102F">
     </a-cylinder>
 
+
     <a-entity
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="PROTOTIPADO 3D"
+
         data-info="El prototipado rápido permite crear versiones físicas de un diseño para comprobar su forma y funcionamiento."
+
         data-panel-x="-14"
         data-panel-y="4.8"
         data-panel-z="-57"
-        obj-model="obj: #tinker-obj_modelo_3d_4; mtl: #tinker-mtl_modelo_3d_4"
+
+        obj-model="
+            obj: #tinker-obj_modelo_3d_4;
+            mtl: #tinker-mtl_modelo_3d_4
+        "
+
         position="-14 2.5 -60"
+
         scale="0.03 0.03 0.03"
+
         rotation="-90 -30 0">
+
     </a-entity>
+
 
 
     <!-- LUCES -->
@@ -1433,17 +1763,20 @@
         color="#E056FD">
     </a-cylinder>
 
+
     <a-cylinder position="-14 2.15 -51"
         radius="1.55"
         height="0.08"
         color="#E056FD">
     </a-cylinder>
 
+
     <a-cylinder position="-24 2.15 -60"
         radius="1.55"
         height="0.08"
         color="#E056FD">
     </a-cylinder>
+
 
     <a-cylinder position="-14 2.15 -60"
         radius="1.55"
@@ -1452,9 +1785,12 @@
     </a-cylinder>
 
 
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
+    <!-- ========================================================= -->
     <!-- SALA 4 - PROGRAMACIÓN -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
+    <!-- ========================================================= -->
 
     <a-plane
         position="19 0.05 -55"
@@ -1464,27 +1800,37 @@
         color="#4A2C18">
     </a-plane>
 
+
+    <!-- PARED TRASERA -->
+
     <a-box
         position="19 6 -66"
         width="20"
         height="12"
         depth="0.5"
+
         material="
             src: #textura-ladrillo;
             repeat: 4 3
         "
+
         shadow>
     </a-box>
+
+
+    <!-- PARED EXTERIOR -->
 
     <a-box
         position="29 6 -55"
         width="0.5"
         height="12"
         depth="22"
+
         material="
             src: #textura-ladrillo;
-            repeat: 3 5
+            repeat: 1 5
         "
+
         shadow>
     </a-box>
 
@@ -1493,94 +1839,81 @@
 
     <a-box
         position="11 6 -44"
-        width="5"
+        width="4"
         height="12"
         depth="0.5"
-        material="src: #textura-ladrillo; repeat: 1 3">
+
+        material="
+            src: #textura-ladrillo;
+            repeat: 1 3
+        ">
     </a-box>
+
 
     <a-box
         position="27 6 -44"
-        width="5"
+        width="4"
         height="12"
         depth="0.5"
-        material="src: #textura-ladrillo; repeat: 1 3">
+
+        material="
+            src: #textura-ladrillo;
+            repeat: 1 3
+        ">
     </a-box>
+
+
+    <!-- PARTE SUPERIOR -->
 
     <a-box
         position="19 10.5 -44"
-        width="16"
+        width="12"
         height="3"
         depth="0.5"
         color="#CA6F1E">
     </a-box>
 
+
+    <!-- MARCO -->
+
     <a-box
         position="13.5 5 -44"
-        width="0.7"
+        width="0.5"
         height="10"
-        depth="0.8"
+        depth="0.7"
         color="#BA4A00">
     </a-box>
+
 
     <a-box
         position="24.5 5 -44"
-        width="0.7"
+        width="0.5"
         height="10"
-        depth="0.8"
+        depth="0.7"
         color="#BA4A00">
     </a-box>
+
 
     <a-box
         position="19 10 -44"
-        width="12"
-        height="0.7"
-        depth="0.8"
+        width="11"
+        height="0.5"
+        depth="0.7"
         color="#BA4A00">
     </a-box>
 
-    <a-box
-        position="19 10.6 -44"
-        width="10"
-        height="0.15"
-        depth="0.15"
-        color="#FFD166">
-    </a-box>
 
     <a-text
         value="PROGRAMACION"
-        position="19 8 -43.8"
+        position="19 8 -43.7"
         align="center"
         color="#FFD166"
-        width="9">
+        width="8">
     </a-text>
 
 
-    <!-- DECORACIÓN -->
 
-    <a-box
-        position="28 6 -65"
-        width="1.2"
-        height="12"
-        depth="1.2"
-        color="#A04000">
-    </a-box>
-
-    <a-box
-        position="10 6 -65"
-        width="1.2"
-        height="12"
-        depth="1.2"
-        color="#A04000">
-    </a-box>
-
-    <a-box
-        position="19 11 -65"
-        width="19"
-        height="0.7"
-        depth="1"
-        color="#A04000">
-    </a-box>
+    <!-- PANEL TRASERO -->
 
     <a-box
         position="19 6 -64.3"
@@ -1590,6 +1923,7 @@
         color="#2C160B">
     </a-box>
 
+
     <a-text
         value="PROGRAMACION"
         position="19 8.5 -64.1"
@@ -1597,6 +1931,7 @@
         color="#FFD166"
         width="9">
     </a-text>
+
 
     <a-text
         value="CÓDIGO • SOFTWARE • DESARROLLO"
@@ -1607,7 +1942,10 @@
     </a-text>
 
 
+
+    <!-- ========================================================= -->
     <!-- SISTEMA 1 -->
+    <!-- ========================================================= -->
 
     <a-cylinder
         position="14 1 -51"
@@ -1616,20 +1954,33 @@
         color="#2C160B">
     </a-cylinder>
 
+
     <a-image
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="SISTEMA INFORMÁTICO 1"
+
         data-info="Este proyecto representa un sistema informático desarrollado para solucionar una necesidad específica mediante software."
+
         data-panel-x="14"
         data-panel-y="6.5"
         data-panel-z="-47"
+
         src="#img-sistema_1"
+
         position="14 3.5 -50.5"
+
         width="8"
+
         height="4.5"
+
         scale="0.5 0.5 0.5">
+
     </a-image>
+
 
 
     <!-- SISTEMA 2 -->
@@ -1641,20 +1992,33 @@
         color="#2C160B">
     </a-cylinder>
 
+
     <a-image
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="SISTEMA INFORMÁTICO 2"
+
         data-info="Los sistemas web permiten administrar información desde un navegador y facilitan el acceso a diferentes usuarios."
+
         data-panel-x="24"
         data-panel-y="6.5"
         data-panel-z="-47"
+
         src="#img-sistema_2"
+
         position="24 3.5 -50.5"
+
         width="8"
+
         height="4.5"
+
         scale="0.5 0.5 0.5">
+
     </a-image>
+
 
 
     <!-- SISTEMA 3 -->
@@ -1666,20 +2030,33 @@
         color="#2C160B">
     </a-cylinder>
 
+
     <a-image
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="DESARROLLO WEB"
+
         data-info="El desarrollo web combina HTML, CSS, JavaScript y otras tecnologías para crear aplicaciones y sitios web interactivos."
+
         data-panel-x="14"
         data-panel-y="6.5"
         data-panel-z="-57"
+
         src="#img-sistema_3"
+
         position="14 3.5 -59.5"
+
         width="8"
+
         height="4.5"
+
         scale="0.5 0.5 0.5">
+
     </a-image>
+
 
 
     <!-- SISTEMA 4 -->
@@ -1691,20 +2068,33 @@
         color="#2C160B">
     </a-cylinder>
 
+
     <a-image
+
         class="clickable"
+
         mostrar-informacion
+
         data-titulo="APLICACIÓN DE SOFTWARE"
+
         data-info="Las aplicaciones de software permiten automatizar procesos, administrar información y ofrecer soluciones a diferentes necesidades."
+
         data-panel-x="24"
         data-panel-y="6.5"
         data-panel-z="-57"
+
         src="#img-sistema_4"
+
         position="24 3.5 -59.5"
+
         width="8"
+
         height="4.5"
+
         scale="0.5 0.5 0.5">
+
     </a-image>
+
 
 
     <!-- LUCES -->
@@ -1715,17 +2105,20 @@
         color="#FFD166">
     </a-cylinder>
 
+
     <a-cylinder position="24 2.15 -51"
         radius="1.55"
         height="0.08"
         color="#FFD166">
     </a-cylinder>
 
+
     <a-cylinder position="14 2.15 -60"
         radius="1.55"
         height="0.08"
         color="#FFD166">
     </a-cylinder>
+
 
     <a-cylinder position="24 2.15 -60"
         radius="1.55"
@@ -1734,9 +2127,10 @@
     </a-cylinder>
 
 
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
     <!-- SEÑALIZACIÓN -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
 
     <a-text
         value="← ARDUINO"
@@ -1746,6 +2140,7 @@
         width="6">
     </a-text>
 
+
     <a-text
         value="MANTENIMIENTO →"
         position="6 3 -14"
@@ -1754,6 +2149,7 @@
         width="6">
     </a-text>
 
+
     <a-text
         value="← MODELOS 3D"
         position="-6 3 -42"
@@ -1761,6 +2157,7 @@
         color="#E056FD"
         width="6">
     </a-text>
+
 
     <a-text
         value="PROGRAMACIÓN →"
@@ -1771,13 +2168,15 @@
     </a-text>
 
 
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
     <!-- PANEL DE INFORMACIÓN -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
 
     <a-entity
         id="panel-info"
         visible="false">
+
 
         <a-plane
             position="0 0 -0.05"
@@ -1787,6 +2186,7 @@
             opacity="0.5">
         </a-plane>
 
+
         <a-plane
             position="0 0 0"
             width="8"
@@ -1794,6 +2194,7 @@
             color="#101820"
             opacity="0.97">
         </a-plane>
+
 
         <a-text
             id="info-titulo"
@@ -1804,16 +2205,18 @@
             width="7">
         </a-text>
 
+
         <a-text
             id="info-texto"
             value=""
-            position="0 0.45 0.08"
+            position="0 0.35 0.08"
             align="center"
             color="#FFFFFF"
             width="6.6"
             wrap-count="45"
             line-height="55">
         </a-text>
+
 
         <a-plane
             id="btn-cerrar"
@@ -1823,6 +2226,7 @@
             height="0.6"
             color="#E74C3C">
         </a-plane>
+
 
         <a-text
             value="CERRAR"
@@ -1835,15 +2239,27 @@
     </a-entity>
 
 
-    <!-- ================================================= -->
+
+    <!-- ========================================================= -->
     <!-- CÁMARA -->
-    <!-- ================================================= -->
+    <!-- ========================================================= -->
 
     <a-camera
+
         id="camera"
+
         position="0 3 2"
-        look-controls="enabled: true; magicWindowTrackingEnabled: true"
-        cursor="rayOrigin: mouse">
+
+        teclado-movimiento
+
+        look-controls="
+            enabled: true;
+            magicWindowTrackingEnabled: true
+        "
+
+        cursor="
+            rayOrigin: mouse
+        ">
 
     </a-camera>
 
@@ -1851,16 +2267,33 @@
 </a-scene>
 
 
-<!-- ================================================= -->
+
+<!-- ========================================================= -->
 <!-- JAVASCRIPT -->
-<!-- ================================================= -->
+<!-- ========================================================= -->
 
 <script>
 
 
-/* =====================================================
-   COMPONENTE INFORMACIÓN
-===================================================== */
+/* ============================================================
+   VARIABLES DE TECLADO
+============================================================ */
+
+const teclas = {
+
+    w: false,
+    a: false,
+    s: false,
+    d: false,
+    shift: false
+
+};
+
+
+
+/* ============================================================
+   COMPONENTE DE INFORMACIÓN
+============================================================ */
 
 AFRAME.registerComponent('mostrar-informacion', {
 
@@ -1887,7 +2320,7 @@ AFRAME.registerComponent('mostrar-informacion', {
             if (!panel || !titulo || !texto) {
 
                 console.error(
-                    "No se encontró el panel de información."
+                    'No se encontró el panel de información.'
                 );
 
                 return;
@@ -1898,6 +2331,7 @@ AFRAME.registerComponent('mostrar-informacion', {
                 'value',
                 tituloInfo
             );
+
 
             texto.setAttribute(
                 'value',
@@ -1910,10 +2344,12 @@ AFRAME.registerComponent('mostrar-informacion', {
                     this.el.getAttribute('data-panel-x')
                 );
 
+
             const y =
                 parseFloat(
                     this.el.getAttribute('data-panel-y')
                 );
+
 
             const z =
                 parseFloat(
@@ -1921,11 +2357,29 @@ AFRAME.registerComponent('mostrar-informacion', {
                 );
 
 
+            if (
+                Number.isNaN(x) ||
+                Number.isNaN(y) ||
+                Number.isNaN(z)
+            ) {
+
+                console.error(
+                    'Posición del panel inválida.'
+                );
+
+                return;
+            }
+
+
             panel.setAttribute(
                 'position',
                 `${x} ${y} ${z}`
             );
 
+
+            /*
+             * El panel mira hacia el pasillo.
+             */
 
             panel.setAttribute(
                 'rotation',
@@ -1945,9 +2399,10 @@ AFRAME.registerComponent('mostrar-informacion', {
 });
 
 
-/* =====================================================
+
+/* ============================================================
    BOTÓN CERRAR
-===================================================== */
+============================================================ */
 
 document.addEventListener(
     'DOMContentLoaded',
@@ -1960,7 +2415,7 @@ document.addEventListener(
             document.querySelector('#panel-info');
 
 
-        if (botonCerrar) {
+        if (botonCerrar && panel) {
 
             botonCerrar.addEventListener(
                 'click',
@@ -1980,24 +2435,10 @@ document.addEventListener(
 );
 
 
-/* =====================================================
-   TECLADO BLUETOOTH
-===================================================== */
 
-const teclas = {
-
-    w: false,
-    s: false,
-    a: false,
-    d: false,
-    shift: false
-
-};
-
-
-/* =====================================================
-   PRESIONAR TECLA
-===================================================== */
+/* ============================================================
+   TECLADO
+============================================================ */
 
 document.addEventListener(
     'keydown',
@@ -2007,38 +2448,42 @@ document.addEventListener(
             event.key.toLowerCase();
 
 
-        if (tecla === 'w') {
+        switch (tecla) {
 
-            teclas.w = true;
+            case 'w':
 
-            event.preventDefault();
+                teclas.w = true;
 
-        }
+                event.preventDefault();
 
-
-        if (tecla === 's') {
-
-            teclas.s = true;
-
-            event.preventDefault();
-
-        }
+                break;
 
 
-        if (tecla === 'a') {
+            case 'a':
 
-            teclas.a = true;
+                teclas.a = true;
 
-            event.preventDefault();
+                event.preventDefault();
 
-        }
+                break;
 
 
-        if (tecla === 'd') {
+            case 's':
 
-            teclas.d = true;
+                teclas.s = true;
 
-            event.preventDefault();
+                event.preventDefault();
+
+                break;
+
+
+            case 'd':
+
+                teclas.d = true;
+
+                event.preventDefault();
+
+                break;
 
         }
 
@@ -2053,9 +2498,10 @@ document.addEventListener(
 );
 
 
-/* =====================================================
-   SOLTAR TECLA
-===================================================== */
+
+/* ============================================================
+   SOLTAR TECLAS
+============================================================ */
 
 document.addEventListener(
     'keyup',
@@ -2065,30 +2511,23 @@ document.addEventListener(
             event.key.toLowerCase();
 
 
-        if (tecla === 'w') {
+        switch (tecla) {
 
-            teclas.w = false;
+            case 'w':
+                teclas.w = false;
+                break;
 
-        }
+            case 'a':
+                teclas.a = false;
+                break;
 
+            case 's':
+                teclas.s = false;
+                break;
 
-        if (tecla === 's') {
-
-            teclas.s = false;
-
-        }
-
-
-        if (tecla === 'a') {
-
-            teclas.a = false;
-
-        }
-
-
-        if (tecla === 'd') {
-
-            teclas.d = false;
+            case 'd':
+                teclas.d = false;
+                break;
 
         }
 
@@ -2103,21 +2542,37 @@ document.addEventListener(
 );
 
 
-/* =====================================================
-   COMPONENTE DE MOVIMIENTO
-===================================================== */
+
+/* ============================================================
+   MOVIMIENTO DE CÁMARA
+============================================================ */
 
 AFRAME.registerComponent(
     'teclado-movimiento',
     {
 
+        init: function () {
+
+            this.velocidadNormal = 3.5;
+
+            this.velocidadCorrer = 7;
+
+            this.limiteX = 32;
+
+            this.limiteZMin = -72;
+
+            this.limiteZMax = 3;
+
+
+            this.posicionAnterior =
+                new THREE.Vector3();
+
+        },
+
+
         tick: function (time, delta) {
 
-            const camera =
-                document.querySelector('#camera');
-
-
-            if (!camera) {
+            if (!delta) {
 
                 return;
 
@@ -2125,83 +2580,92 @@ AFRAME.registerComponent(
 
 
             const posicion =
-                camera.object3D.position;
+                this.el.object3D.position;
+
 
             const rotacion =
-                camera.object3D.rotation;
+                this.el.object3D.rotation;
 
 
-            /* ==========================================
-               VELOCIDAD
-            ========================================== */
+            /*
+             * Guardamos posición anterior.
+             */
+
+            this.posicionAnterior.copy(
+                posicion
+            );
+
+
+            /*
+             * Velocidad.
+             */
 
             let velocidad =
-                0.005;
+                this.velocidadNormal;
 
-
-            /* SHIFT = CORRER */
 
             if (teclas.shift) {
 
                 velocidad =
-                    0.012;
+                    this.velocidadCorrer;
 
             }
 
 
-            /*
-             * delta está en milisegundos.
-             * Lo convertimos a una velocidad estable.
-             */
-
             const movimiento =
-                velocidad * delta;
+                velocidad *
+                (delta / 1000);
 
 
-            /* ==========================================
-               DIRECCIÓN HACIA DONDE MIRA
-            ========================================== */
+            /*
+             * Dirección frontal.
+             */
 
             const direccionX =
                 -Math.sin(rotacion.y);
+
 
             const direccionZ =
                 -Math.cos(rotacion.y);
 
 
-            /* ==========================================
-               W = AVANZAR
-            ========================================== */
+            /*
+             * W
+             */
 
             if (teclas.w) {
 
                 posicion.x +=
-                    direccionX * movimiento;
+                    direccionX *
+                    movimiento;
 
                 posicion.z +=
-                    direccionZ * movimiento;
+                    direccionZ *
+                    movimiento;
 
             }
 
 
-            /* ==========================================
-               S = RETROCEDER
-            ========================================== */
+            /*
+             * S
+             */
 
             if (teclas.s) {
 
                 posicion.x -=
-                    direccionX * movimiento;
+                    direccionX *
+                    movimiento;
 
                 posicion.z -=
-                    direccionZ * movimiento;
+                    direccionZ *
+                    movimiento;
 
             }
 
 
-            /* ==========================================
-               A = IZQUIERDA
-            ========================================== */
+            /*
+             * A
+             */
 
             if (teclas.a) {
 
@@ -2216,9 +2680,9 @@ AFRAME.registerComponent(
             }
 
 
-            /* ==========================================
-               D = DERECHA
-            ========================================== */
+            /*
+             * D
+             */
 
             if (teclas.d) {
 
@@ -2233,46 +2697,46 @@ AFRAME.registerComponent(
             }
 
 
-            /* ==========================================
-               MANTENER ALTURA
-            ========================================== */
+            /*
+             * Altura fija.
+             */
 
             posicion.y = 3;
 
+
+            /*
+             * Límites generales del museo.
+             */
+
+            posicion.x =
+                Math.max(
+                    -33,
+                    Math.min(
+                        33,
+                        posicion.x
+                    )
+                );
+
+
+            posicion.z =
+                Math.max(
+                    -72,
+                    Math.min(
+                        3,
+                        posicion.z
+                    )
+                );
+
         }
 
     }
 );
 
 
-/* =====================================================
-   ACTIVAR MOVIMIENTO DEL TECLADO
-===================================================== */
 
-document.addEventListener(
-    'DOMContentLoaded',
-    function () {
-
-        const camera =
-            document.querySelector('#camera');
-
-
-        if (camera) {
-
-            camera.setAttribute(
-                'teclado-movimiento',
-                ''
-            );
-
-        }
-
-    }
-);
-
-
-/* =====================================================
-   SENSOR DE MOVIMIENTO DEL CELULAR
-===================================================== */
+/* ============================================================
+   SENSORES DEL CELULAR
+============================================================ */
 
 document.addEventListener(
     'DOMContentLoaded',
@@ -2296,35 +2760,34 @@ document.addEventListener(
             async function () {
 
 
-                /* =====================================
-                   iPhone / iPad
-                ===================================== */
+                /*
+                 * iPhone / iPad
+                 */
 
                 if (
+
                     typeof DeviceOrientationEvent !==
                     'undefined' &&
 
                     typeof DeviceOrientationEvent
                         .requestPermission ===
-                        'function'
+                    'function'
+
                 ) {
 
                     try {
 
                         const permiso =
-                            await
-                            DeviceOrientationEvent
+                            await DeviceOrientationEvent
                                 .requestPermission();
 
 
-                        if (
-                            permiso ===
-                            'granted'
-                        ) {
+                        if (permiso === 'granted') {
 
                             console.log(
-                                'Sensores activados.'
+                                'Sensores activados correctamente.'
                             );
+
 
                             boton.style.display =
                                 'none';
@@ -2332,7 +2795,7 @@ document.addEventListener(
                         } else {
 
                             alert(
-                                'No se concedió permiso para usar el movimiento del dispositivo.'
+                                'No se concedió permiso para utilizar los sensores.'
                             );
 
                         }
@@ -2340,8 +2803,12 @@ document.addEventListener(
                     } catch (error) {
 
                         console.error(
-                            'Error con el sensor:',
+                            'Error al activar sensores:',
                             error
+                        );
+
+                        alert(
+                            'No fue posible activar los sensores.'
                         );
 
                     }
@@ -2349,15 +2816,16 @@ document.addEventListener(
                 }
 
 
-                /* =====================================
-                   Android
-                ===================================== */
+                /*
+                 * Android / otros navegadores
+                 */
 
                 else {
 
                     console.log(
-                        'Movimiento del celular disponible.'
+                        'Movimiento del dispositivo disponible.'
                     );
+
 
                     boton.style.display =
                         'none';
@@ -2365,25 +2833,24 @@ document.addEventListener(
                 }
 
             }
-
         );
 
     }
 );
 
 
-/* =====================================================
-   EVITAR QUE EL TECLADO SE QUEDE PRESIONADO
-   CUANDO SE PIERDE EL FOCO
-===================================================== */
+
+/* ============================================================
+   EVITAR TECLAS ATASCADAS
+============================================================ */
 
 window.addEventListener(
     'blur',
     function () {
 
         teclas.w = false;
-        teclas.s = false;
         teclas.a = false;
+        teclas.s = false;
         teclas.d = false;
         teclas.shift = false;
 
@@ -2391,33 +2858,82 @@ window.addEventListener(
 );
 
 
-/* =====================================================
-   MENSAJE DE AYUDA EN CONSOLA
-===================================================== */
+
+/* ============================================================
+   ESC PARA CERRAR PANEL
+============================================================ */
+
+document.addEventListener(
+    'keydown',
+    function (event) {
+
+        if (event.key === 'Escape') {
+
+            const panel =
+                document.querySelector(
+                    '#panel-info'
+                );
+
+
+            if (panel) {
+
+                panel.setAttribute(
+                    'visible',
+                    'false'
+                );
+
+            }
+
+        }
+
+    }
+);
+
+
+
+/* ============================================================
+   MENSAJES DE CONSOLA
+============================================================ */
 
 console.log(
-    'Museo Virtual iniciado.'
+    '======================================'
 );
 
 console.log(
-    'Controles: W A S D para moverse.'
+    'MUSEO VIRTUAL DE TECNOLOGÍA'
 );
 
 console.log(
-    'SHIFT + W/A/S/D para correr.'
+    '======================================'
 );
 
 console.log(
-    'Mouse Bluetooth para interactuar.'
+    'W A S D = movimiento'
 );
 
 console.log(
-    'Movimiento del celular para mirar.'
+    'SHIFT = correr'
+);
+
+console.log(
+    'Mouse = mirar/interactuar'
+);
+
+console.log(
+    'ESC = cerrar información'
+);
+
+console.log(
+    'Celular = movimiento de cámara'
+);
+
+console.log(
+    'Museo iniciado correctamente.'
 );
 
 
 </script>
 
-
 </body>
+
 </html>
